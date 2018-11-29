@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Afiq Yusof on 2018.11.28 
+Copyright © 2018 Afiq Yusof. All rights reserved.
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -7,66 +11,68 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template/siteTemplate.xhtml">
-        
+
         <ui:define name="title">
             <h:outputText value="Public Book List"></h:outputText>
         </ui:define>
 
         <ui:define name="editableContent">
-            <h:form id="PublicBookListForm">
-                <p:panel header="#{bundle.ListPublicBookTitle}">
-                    <p:dataTable id="datalist" value="#{publicBookController.items}" var="item"
-                                 selectionMode="single" selection="#{publicBookController.selected}"
-                                 paginator="true"
-                                 reflow="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+            <div align="center" style="width:97%;">
+                <h:form id="PublicBookListForm">
+                    <p:panel header="#{bundle.ListPublicBookTitle}">
+                        <p:dataTable id="datalist" value="#{publicBookController.items}" var="item"
+                                     selectionMode="single" selection="#{publicBookController.selected}"
+                                     paginator="true"
+                                     reflow="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
 
-                        <p:ajax event="rowSelect"   update="viewButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton"/>
+                            <p:ajax event="rowSelect"   update="viewButton"/>
+                            <p:ajax event="rowUnselect" update="viewButton"/>
 
-                        <!-- Book Title -->
-                        <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicBookTitle_title}" >
-                            <h:outputText class="standardText" value="#{item.title}"/>
-                        </p:column>
-                        
-                        <!-- Book Author -->
-                        <p:column sortBy="#{item.author}" headerText="#{bundle.ListPublicBookTitle_author}" >
-                            <h:outputText class="standardText" value="#{item.author}"/>
-                        </p:column>
-                        
-                        <!-- Book Publication Year -->
-                        <p:column sortBy="#{item.publicationYear}" headerText="#{bundle.ListPublicBookTitle_publicationYear}" >
-                            <h:outputText class="standardText" value="#{item.publicationYear}"/>
-                        </p:column>
-                        
-                        <!-- Book ISBN -->
-                        <p:column sortBy="#{item.isbn}" headerText="#{bundle.ListPublicBookTitle_isbn}" >
-                            <h:outputText class="standardText" value="#{item.isbn}"/>
-                        </p:column>
-                        
-                        <!-- Book Genres -->
-                        <p:column sortBy="#{item.genres}" headerText="#{bundle.ListPublicBookTitle_genres}" >
-                            <h:outputText class="standardText" value="#{item.genres}"/>
-                        </p:column>
-                        
-                        <!-- Book Average Price -->
-                        <p:column sortBy="#{item.averagePrice}" headerText="#{bundle.ListPublicBookTitle_averagePrice}" >
-                            <h:outputText class="standardText" value="#{item.averagePrice}"/>
-                        </p:column>
-                        
-                        <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
-                                             update=":PublicBookViewForm" oncomplete="PF('PublicBookViewDialog').show()"
-                                             disabled="#{empty publicBookController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                            <!-- Book Title -->
+                            <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicBookTitle_title}" >
+                                <h:outputText class="standardText" value="#{item.title}"/>
+                            </p:column>
 
-            <ui:include src="View.xhtml"/>
+                            <!-- Book Author -->
+                            <p:column sortBy="#{item.author}" headerText="#{bundle.ListPublicBookTitle_author}" >
+                                <h:outputText class="standardText" value="#{item.author}"/>
+                            </p:column>
+
+                            <!-- Book Publication Year -->
+                            <p:column sortBy="#{item.publicationYear}" headerText="#{bundle.ListPublicBookTitle_publicationYear}" >
+                                <h:outputText class="standardText" value="#{item.publicationYear}"/>
+                            </p:column>
+
+                            <!-- Book ISBN -->
+                            <p:column sortBy="#{item.isbn}" headerText="#{bundle.ListPublicBookTitle_isbn}" >
+                                <h:outputText class="standardText" value="#{item.isbn}"/>
+                            </p:column>
+
+                            <!-- Book Genres -->
+                            <p:column sortBy="#{item.genres}" headerText="#{bundle.ListPublicBookTitle_genres}" >
+                                <h:outputText class="standardText" value="#{item.genres}"/>
+                            </p:column>
+
+                            <!-- Book Average Price -->
+                            <p:column sortBy="#{item.averagePrice}" headerText="#{bundle.ListPublicBookTitle_averagePrice}" >
+                                <h:outputText class="standardText" value="#{item.averagePrice}"/>
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
+                                                 update=":PublicBookViewForm" oncomplete="PF('PublicBookViewDialog').show()"
+                                                 disabled="#{empty publicBookController.selected}"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+                <ui:include src="View.xhtml"/>
+            </div>
         </ui:define>
     </ui:composition>
 

@@ -11,67 +11,69 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template/siteTemplate.xhtml">
-        
+
         <ui:define name="title">
             <h:outputText value="Public Album List"></h:outputText>
         </ui:define>
 
         <ui:define name="editableContent">
-            <h:form id="PublicAlbumListForm">
-                <p:panel header="#{bundle.ListPublicAlbumTitle}">
-                    <p:dataTable id="datalist" value="#{publicAlbumController.items}" var="item"
-                                 selectionMode="single" selection="#{publicAlbumController.selected}"
-                                 paginator="true"
-                                 reflow="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 class="dataTable"
-                                 >
+            <div align="center" style="width:97%;">
+                <h:form id="PublicAlbumListForm">
+                    <p:panel header="#{bundle.ListPublicAlbumTitle}">
+                        <p:dataTable id="datalist" value="#{publicAlbumController.items}" var="item"
+                                     selectionMode="single" selection="#{publicAlbumController.selected}"
+                                     paginator="true"
+                                     reflow="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     class="dataTable"
+                                     >
 
-                        <p:ajax event="rowSelect"   update="viewButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton"/>
+                            <p:ajax event="rowSelect"   update="viewButton"/>
+                            <p:ajax event="rowUnselect" update="viewButton"/>
 
-                        <!-- Album Title -->
-                        <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicAlbumTitle_title}" >
-                            <h:outputText class="standardText" value="#{item.title}"/>
-                        </p:column>
-                        
-                        <!-- Album Artist -->
-                        <p:column sortBy="#{item.artist}" headerText="#{bundle.ListPublicAlbumTitle_artist}" >
-                            <h:outputText class="standardText" value="#{item.artist}"/>
-                        </p:column>
-                        
-                        <!-- Album Release Year -->
-                        <p:column sortBy="#{item.releaseYear}" headerText="#{bundle.ListPublicAlbumTitle_releaseYear}" >
-                            <h:outputText class="standardText" value="#{item.releaseYear}"/>
-                        </p:column>
-                        
-                        <!-- Album Track Numbers -->
-                        <p:column sortBy="#{item.trackNum}" headerText="#{bundle.ListPublicAlbumTitle_trackNum}" >
-                            <h:outputText class="standardText" value="#{item.trackNum}"/>
-                        </p:column>
-                        
-                        <!-- Album Genres -->
-                        <p:column sortBy="#{item.genres}" headerText="#{bundle.ListPublicAlbumTitle_genre}" >
-                            <h:outputText class="standardText" value="#{item.genres}"/>
-                        </p:column>
-                        
-                        <!-- Album Average Price -->
-                        <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicAlbumTitle_averagePrice}" >
-                            <h:outputText class="standardText" value="#{item.averagePrice}"/>
-                        </p:column>
-                        
-                        <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
-                                             update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
-                                             disabled="#{empty publicAlbumController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
-            
-            <ui:include src="View.xhtml"/>
+                            <!-- Album Title -->
+                            <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicAlbumTitle_title}" >
+                                <h:outputText class="standardText" value="#{item.title}"/>
+                            </p:column>
+
+                            <!-- Album Artist -->
+                            <p:column sortBy="#{item.artist}" headerText="#{bundle.ListPublicAlbumTitle_artist}" >
+                                <h:outputText class="standardText" value="#{item.artist}"/>
+                            </p:column>
+
+                            <!-- Album Release Year -->
+                            <p:column sortBy="#{item.releaseYear}" headerText="#{bundle.ListPublicAlbumTitle_releaseYear}" >
+                                <h:outputText class="standardText" value="#{item.releaseYear}"/>
+                            </p:column>
+
+                            <!-- Album Track Numbers -->
+                            <p:column sortBy="#{item.trackNum}" headerText="#{bundle.ListPublicAlbumTitle_trackNum}" >
+                                <h:outputText class="standardText" value="#{item.trackNum}"/>
+                            </p:column>
+
+                            <!-- Album Genres -->
+                            <p:column sortBy="#{item.genres}" headerText="#{bundle.ListPublicAlbumTitle_genres}" >
+                                <h:outputText class="standardText" value="#{item.genres}"/>
+                            </p:column>
+
+                            <!-- Album Average Price -->
+                            <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicAlbumTitle_averagePrice}" >
+                                <h:outputText class="standardText" value="#{item.averagePrice}"/>
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
+                                                 update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
+                                                 disabled="#{empty publicAlbumController.selected}"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+                <ui:include src="View.xhtml"/>
+            </div>
         </ui:define>
     </ui:composition>
 
