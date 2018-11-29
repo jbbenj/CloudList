@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserAlbumViewDlg" widgetVar="UserAlbumViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserAlbumTitle}">
+            <h:form id="UserAlbumViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userAlbumController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_id}"/>
+                        <h:outputText value="#{userAlbumController.selected.id}" title="#{bundle.ViewUserAlbumTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_title}"/>
+                        <h:outputText value="#{userAlbumController.selected.title}" title="#{bundle.ViewUserAlbumTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_artist}"/>
+                        <h:outputText value="#{userAlbumController.selected.artist}" title="#{bundle.ViewUserAlbumTitle_artist}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_album}"/>
+                        <h:outputText value="#{userAlbumController.selected.album}" title="#{bundle.ViewUserAlbumTitle_album}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_releaseYear}"/>
+                        <h:outputText value="#{userAlbumController.selected.releaseYear}" title="#{bundle.ViewUserAlbumTitle_releaseYear}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_trackNum}"/>
+                        <h:outputText value="#{userAlbumController.selected.trackNum}" title="#{bundle.ViewUserAlbumTitle_trackNum}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_genres}"/>
+                        <h:outputText value="#{userAlbumController.selected.genres}" title="#{bundle.ViewUserAlbumTitle_genres}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_averagePrice}"/>
+                        <h:outputText value="#{userAlbumController.selected.averagePrice}" title="#{bundle.ViewUserAlbumTitle_averagePrice}"/>
+                        <h:outputText value="#{bundle.ViewUserAlbumLabel_userId}"/>
+                        <h:outputText value="#{userAlbumController.selected.userId}" title="#{bundle.ViewUserAlbumTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UserAlbumViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PublicAlbumViewDlg" widgetVar="PublicAlbumViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicAlbumTitle}">
+            <h:form id="PublicAlbumViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{publicAlbumController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_id}"/>
+                        <h:outputText value="#{publicAlbumController.selected.id}" title="#{bundle.ViewPublicAlbumTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_title}"/>
+                        <h:outputText value="#{publicAlbumController.selected.title}" title="#{bundle.ViewPublicAlbumTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_artist}"/>
+                        <h:outputText value="#{publicAlbumController.selected.artist}" title="#{bundle.ViewPublicAlbumTitle_artist}"/>
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_releaseYear}"/>
+                        <h:outputText value="#{publicAlbumController.selected.releaseYear}" title="#{bundle.ViewPublicAlbumTitle_releaseYear}"/>
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_trackNum}"/>
+                        <h:outputText value="#{publicAlbumController.selected.trackNum}" title="#{bundle.ViewPublicAlbumTitle_trackNum}"/>
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_genres}"/>
+                        <h:outputText value="#{publicAlbumController.selected.genres}" title="#{bundle.ViewPublicAlbumTitle_genres}"/>
+                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_averagePrice}"/>
+                        <h:outputText value="#{publicAlbumController.selected.averagePrice}" title="#{bundle.ViewPublicAlbumTitle_averagePrice}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PublicAlbumViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

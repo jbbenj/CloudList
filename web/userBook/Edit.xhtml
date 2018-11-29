@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserBookEditDlg" widgetVar="UserBookEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUserBookTitle}">
+            <h:form id="UserBookEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userBookController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userBookController.selected.id}" title="#{bundle.EditUserBookTitle_id}" required="true" requiredMessage="#{bundle.EditUserBookRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{userBookController.selected.title}" title="#{bundle.EditUserBookTitle_title}" required="true" requiredMessage="#{bundle.EditUserBookRequiredMessage_title}"/>
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_author}" for="author" />
+                        <p:inputText id="author" value="#{userBookController.selected.author}" title="#{bundle.EditUserBookTitle_author}" required="true" requiredMessage="#{bundle.EditUserBookRequiredMessage_author}"/>
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_publicationYear}" for="publicationYear" />
+                        <p:inputText id="publicationYear" value="#{userBookController.selected.publicationYear}" title="#{bundle.EditUserBookTitle_publicationYear}" required="true" requiredMessage="#{bundle.EditUserBookRequiredMessage_publicationYear}"/>
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_isbn}" for="isbn" />
+                        <p:inputText id="isbn" value="#{userBookController.selected.isbn}" title="#{bundle.EditUserBookTitle_isbn}" required="true" requiredMessage="#{bundle.EditUserBookRequiredMessage_isbn}"/>
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_genres}" for="genres" />
+                        <p:inputText id="genres" value="#{userBookController.selected.genres}" title="#{bundle.EditUserBookTitle_genres}" required="true" requiredMessage="#{bundle.EditUserBookRequiredMessage_genres}"/>
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_averagePrice}" for="averagePrice" />
+                        <p:inputText id="averagePrice" value="#{userBookController.selected.averagePrice}" title="#{bundle.EditUserBookTitle_averagePrice}" />
+                        <p:outputLabel value="#{bundle.EditUserBookLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{userBookController.selected.userId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userBookController.update}" value="#{bundle.Save}" update="display,:UserBookListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserBookEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserBookEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

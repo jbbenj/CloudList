@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserBookViewDlg" widgetVar="UserBookViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserBookTitle}">
+            <h:form id="UserBookViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userBookController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserBookLabel_id}"/>
+                        <h:outputText value="#{userBookController.selected.id}" title="#{bundle.ViewUserBookTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_title}"/>
+                        <h:outputText value="#{userBookController.selected.title}" title="#{bundle.ViewUserBookTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_author}"/>
+                        <h:outputText value="#{userBookController.selected.author}" title="#{bundle.ViewUserBookTitle_author}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_publicationYear}"/>
+                        <h:outputText value="#{userBookController.selected.publicationYear}" title="#{bundle.ViewUserBookTitle_publicationYear}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_isbn}"/>
+                        <h:outputText value="#{userBookController.selected.isbn}" title="#{bundle.ViewUserBookTitle_isbn}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_genres}"/>
+                        <h:outputText value="#{userBookController.selected.genres}" title="#{bundle.ViewUserBookTitle_genres}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_averagePrice}"/>
+                        <h:outputText value="#{userBookController.selected.averagePrice}" title="#{bundle.ViewUserBookTitle_averagePrice}"/>
+                        <h:outputText value="#{bundle.ViewUserBookLabel_userId}"/>
+                        <h:outputText value="#{userBookController.selected.userId}" title="#{bundle.ViewUserBookTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UserBookViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

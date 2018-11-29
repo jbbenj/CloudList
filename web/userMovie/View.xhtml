@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserMovieViewDlg" widgetVar="UserMovieViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserMovieTitle}">
+            <h:form id="UserMovieViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userMovieController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_id}"/>
+                        <h:outputText value="#{userMovieController.selected.id}" title="#{bundle.ViewUserMovieTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_title}"/>
+                        <h:outputText value="#{userMovieController.selected.title}" title="#{bundle.ViewUserMovieTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_youtubeTrailerId}"/>
+                        <h:outputText value="#{userMovieController.selected.youtubeTrailerId}" title="#{bundle.ViewUserMovieTitle_youtubeTrailerId}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_genres}"/>
+                        <h:outputText value="#{userMovieController.selected.genres}" title="#{bundle.ViewUserMovieTitle_genres}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_releaseDate}"/>
+                        <h:outputText value="#{userMovieController.selected.releaseDate}" title="#{bundle.ViewUserMovieTitle_releaseDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_director}"/>
+                        <h:outputText value="#{userMovieController.selected.director}" title="#{bundle.ViewUserMovieTitle_director}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_stars}"/>
+                        <h:outputText value="#{userMovieController.selected.stars}" title="#{bundle.ViewUserMovieTitle_stars}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_filmRating}"/>
+                        <h:outputText value="#{userMovieController.selected.filmRating}" title="#{bundle.ViewUserMovieTitle_filmRating}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_percentLiked}"/>
+                        <h:outputText value="#{userMovieController.selected.percentLiked}" title="#{bundle.ViewUserMovieTitle_percentLiked}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_averagePrice}"/>
+                        <h:outputText value="#{userMovieController.selected.averagePrice}" title="#{bundle.ViewUserMovieTitle_averagePrice}"/>
+                        <h:outputText value="#{bundle.ViewUserMovieLabel_userId}"/>
+                        <h:outputText value="#{userMovieController.selected.userId}" title="#{bundle.ViewUserMovieTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UserMovieViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

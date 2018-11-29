@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PublicMovieCreateDlg" widgetVar="PublicMovieCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicMovieTitle}">
+            <h:form id="PublicMovieCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{publicMovieController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{publicMovieController.selected.id}" title="#{bundle.CreatePublicMovieTitle_id}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{publicMovieController.selected.title}" title="#{bundle.CreatePublicMovieTitle_title}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_title}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_youtubeTrailerId}" for="youtubeTrailerId" />
+                        <p:inputText id="youtubeTrailerId" value="#{publicMovieController.selected.youtubeTrailerId}" title="#{bundle.CreatePublicMovieTitle_youtubeTrailerId}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_youtubeTrailerId}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_genres}" for="genres" />
+                        <p:inputText id="genres" value="#{publicMovieController.selected.genres}" title="#{bundle.CreatePublicMovieTitle_genres}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_genres}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_releaseDate}" for="releaseDate" />
+                        <p:calendar id="releaseDate" pattern="MM/dd/yyyy" value="#{publicMovieController.selected.releaseDate}" title="#{bundle.EditPublicMovieTitle_releaseDate}" required="true" requiredMessage="#{bundle.EditPublicMovieRequiredMessage_releaseDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_director}" for="director" />
+                        <p:inputText id="director" value="#{publicMovieController.selected.director}" title="#{bundle.CreatePublicMovieTitle_director}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_director}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_stars}" for="stars" />
+                        <p:inputText id="stars" value="#{publicMovieController.selected.stars}" title="#{bundle.CreatePublicMovieTitle_stars}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_stars}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_filmRating}" for="filmRating" />
+                        <p:inputText id="filmRating" value="#{publicMovieController.selected.filmRating}" title="#{bundle.CreatePublicMovieTitle_filmRating}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_filmRating}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_percentLiked}" for="percentLiked" />
+                        <p:inputText id="percentLiked" value="#{publicMovieController.selected.percentLiked}" title="#{bundle.CreatePublicMovieTitle_percentLiked}" required="true" requiredMessage="#{bundle.CreatePublicMovieRequiredMessage_percentLiked}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicMovieLabel_averagePrice}" for="averagePrice" />
+                        <p:inputText id="averagePrice" value="#{publicMovieController.selected.averagePrice}" title="#{bundle.CreatePublicMovieTitle_averagePrice}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{publicMovieController.create}" value="#{bundle.Save}" update="display,:PublicMovieListForm:datalist,:growl" oncomplete="handleSubmit(args,'PublicMovieCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PublicMovieCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PublicAlbumCreateDlg" widgetVar="PublicAlbumCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicAlbumTitle}">
+            <h:form id="PublicAlbumCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{publicAlbumController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{publicAlbumController.selected.id}" title="#{bundle.CreatePublicAlbumTitle_id}" required="true" requiredMessage="#{bundle.CreatePublicAlbumRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{publicAlbumController.selected.title}" title="#{bundle.CreatePublicAlbumTitle_title}" required="true" requiredMessage="#{bundle.CreatePublicAlbumRequiredMessage_title}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_artist}" for="artist" />
+                        <p:inputText id="artist" value="#{publicAlbumController.selected.artist}" title="#{bundle.CreatePublicAlbumTitle_artist}" required="true" requiredMessage="#{bundle.CreatePublicAlbumRequiredMessage_artist}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_releaseYear}" for="releaseYear" />
+                        <p:inputText id="releaseYear" value="#{publicAlbumController.selected.releaseYear}" title="#{bundle.CreatePublicAlbumTitle_releaseYear}" required="true" requiredMessage="#{bundle.CreatePublicAlbumRequiredMessage_releaseYear}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_trackNum}" for="trackNum" />
+                        <p:inputText id="trackNum" value="#{publicAlbumController.selected.trackNum}" title="#{bundle.CreatePublicAlbumTitle_trackNum}" required="true" requiredMessage="#{bundle.CreatePublicAlbumRequiredMessage_trackNum}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_genres}" for="genres" />
+                        <p:inputText id="genres" value="#{publicAlbumController.selected.genres}" title="#{bundle.CreatePublicAlbumTitle_genres}" required="true" requiredMessage="#{bundle.CreatePublicAlbumRequiredMessage_genres}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicAlbumLabel_averagePrice}" for="averagePrice" />
+                        <p:inputText id="averagePrice" value="#{publicAlbumController.selected.averagePrice}" title="#{bundle.CreatePublicAlbumTitle_averagePrice}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{publicAlbumController.create}" value="#{bundle.Save}" update="display,:PublicAlbumListForm:datalist,:growl" oncomplete="handleSubmit(args,'PublicAlbumCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PublicAlbumCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

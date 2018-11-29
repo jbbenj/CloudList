@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserBookCreateDlg" widgetVar="UserBookCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserBookTitle}">
+            <h:form id="UserBookCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userBookController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userBookController.selected.id}" title="#{bundle.CreateUserBookTitle_id}" required="true" requiredMessage="#{bundle.CreateUserBookRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{userBookController.selected.title}" title="#{bundle.CreateUserBookTitle_title}" required="true" requiredMessage="#{bundle.CreateUserBookRequiredMessage_title}"/>
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_author}" for="author" />
+                        <p:inputText id="author" value="#{userBookController.selected.author}" title="#{bundle.CreateUserBookTitle_author}" required="true" requiredMessage="#{bundle.CreateUserBookRequiredMessage_author}"/>
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_publicationYear}" for="publicationYear" />
+                        <p:inputText id="publicationYear" value="#{userBookController.selected.publicationYear}" title="#{bundle.CreateUserBookTitle_publicationYear}" required="true" requiredMessage="#{bundle.CreateUserBookRequiredMessage_publicationYear}"/>
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_isbn}" for="isbn" />
+                        <p:inputText id="isbn" value="#{userBookController.selected.isbn}" title="#{bundle.CreateUserBookTitle_isbn}" required="true" requiredMessage="#{bundle.CreateUserBookRequiredMessage_isbn}"/>
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_genres}" for="genres" />
+                        <p:inputText id="genres" value="#{userBookController.selected.genres}" title="#{bundle.CreateUserBookTitle_genres}" required="true" requiredMessage="#{bundle.CreateUserBookRequiredMessage_genres}"/>
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_averagePrice}" for="averagePrice" />
+                        <p:inputText id="averagePrice" value="#{userBookController.selected.averagePrice}" title="#{bundle.CreateUserBookTitle_averagePrice}" />
+                        <p:outputLabel value="#{bundle.CreateUserBookLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{userBookController.selected.userId}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userBookController.create}" value="#{bundle.Save}" update="display,:UserBookListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserBookCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserBookCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
