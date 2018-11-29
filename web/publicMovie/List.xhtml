@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Afiq Yusof on 2018.11.28 
+Copyright © 2018 Afiq Yusof. All rights reserved.
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -6,11 +10,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-
-
+    <ui:composition template="/template/siteTemplate.xhtml">
+        
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListPublicMovieTitle}"></h:outputText>
+            <h:outputText value="Public Movie List"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
@@ -19,88 +22,69 @@
                     <p:dataTable id="datalist" value="#{publicMovieController.items}" var="item"
                                  selectionMode="single" selection="#{publicMovieController.selected}"
                                  paginator="true"
+                                 reflow="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                        <!-- Movie Title -->
+                        <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicMovieTitle_title}" >
+                            <h:outputText class="standardText" value="#{item.title}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_title}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.title}"/>
+                        
+                        <!-- Movie YouTube Trailer ID -->
+                        <p:column sortBy="#{item.youtubeTrailerId}" headerText="#{bundle.ListPublicMovieTitle_youtubeTrailerId}" >
+                            <h:outputText class="standardText" value="#{item.youtubeTrailerId}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_youtubeTrailerId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.youtubeTrailerId}"/>
+                        
+                        <!-- Movie Genres -->
+                        <p:column sortBy="#{item.genres}" headerText="#{bundle.ListPublicMovieTitle_genres}" >
+                            <h:outputText class="standardText" value="#{item.genres}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_genres}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.genres}"/>
+                        
+                        <!-- Movie Release Date -->
+                        <p:column sortBy="#{item.releaseDate}" headerText="#{bundle.ListPublicMovieTitle_releaseDate}" >
+                            <h:outputText class="standardText" value="#{item.releaseDate}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_releaseDate}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.releaseDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
+                        
+                        <!-- Movie Director -->
+                        <p:column sortBy="#{item.director}" headerText="#{bundle.ListPublicMovieTitle_director}" >
+                            <h:outputText class="standardText" value="#{item.director}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_director}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.director}"/>
+                        
+                        <!-- Movie Stars -->
+                        <p:column sortBy="#{item.stars}" headerText="#{bundle.ListPublicMovieTitle_stars}" >
+                            <h:outputText class="standardText" value="#{item.stars}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_stars}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.stars}"/>
+                        
+                        <!-- Movie Film Rating -->
+                        <p:column sortBy="#{item.filmRating}" headerText="#{bundle.ListPublicMovieTitle_filmRating}" >
+                            <h:outputText class="standardText" value="#{item.filmRating}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_filmRating}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.filmRating}"/>
+                        
+                        <!-- Movie Percent Liked -->
+                        <p:column sortBy="#{item.percentLiked}" headerText="#{bundle.ListPublicMovieTitle_percentLiked}" >
+                            <h:outputText class="standardText" value="#{item.percentLiked}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_percentLiked}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.percentLiked}"/>
+                        
+                        <!-- Movie Average Price -->
+                        <p:column sortBy="#{item.averagePrice}" headerText="#{bundle.ListPublicMovieTitle_averagePrice}" >
+                            <h:outputText class="standardText" value="#{item.averagePrice}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicMovieTitle_averagePrice}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.averagePrice}"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{publicMovieController.prepareCreate}" update=":PublicMovieCreateForm" oncomplete="PF('PublicMovieCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PublicMovieViewForm" oncomplete="PF('PublicMovieViewDialog').show()" disabled="#{empty publicMovieController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PublicMovieEditForm" oncomplete="PF('PublicMovieEditDialog').show()" disabled="#{empty publicMovieController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{publicMovieController.destroy}" update=":growl,datalist" disabled="#{empty publicMovieController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
+                                             update=":PublicMovieViewForm" oncomplete="PF('PublicMovieViewDialog').show()"
+                                             disabled="#{empty publicMovieController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

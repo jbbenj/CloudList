@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Afiq Yusof on 2018.11.28 
+Copyright © 2018 Afiq Yusof. All rights reserved.
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -8,27 +12,49 @@
 
     <ui:composition>
 
-        <p:dialog id="PublicAlbumViewDlg" widgetVar="PublicAlbumViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicAlbumTitle}">
-            <h:form id="PublicAlbumViewForm">
+        <p:dialog id="PublicAlbumViewDlg" widgetVar="PublicAlbumViewDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicAlbumTitle}">
+            <h:form id="PublicAlbumViewForm" class="ui-datatable-data">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{publicAlbumController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPublicAlbumLabel_id}"/>
-                        <h:outputText value="#{publicAlbumController.selected.id}" title="#{bundle.ViewPublicAlbumTitle_id}"/>
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{publicAlbumController.selected != null}">
+                        
+                        <!-- Album Title --->
                         <h:outputText value="#{bundle.ViewPublicAlbumLabel_title}"/>
-                        <h:outputText value="#{publicAlbumController.selected.title}" title="#{bundle.ViewPublicAlbumTitle_title}"/>
+                        <h:outputText value="#{publicAlbumController.selected.title}"/>
+                        
+                        <!-- Album Artist -->
                         <h:outputText value="#{bundle.ViewPublicAlbumLabel_artist}"/>
-                        <h:outputText value="#{publicAlbumController.selected.artist}" title="#{bundle.ViewPublicAlbumTitle_artist}"/>
+                        <h:outputText value="#{publicAlbumController.selected.artist}"/>
+                        
+                        <!-- Album Release Year -->
                         <h:outputText value="#{bundle.ViewPublicAlbumLabel_releaseYear}"/>
-                        <h:outputText value="#{publicAlbumController.selected.releaseYear}" title="#{bundle.ViewPublicAlbumTitle_releaseYear}"/>
+                        <h:outputText value="#{publicAlbumController.selected.releaseYear}"/>
+                        
+                        <!-- Album Track Number -->
                         <h:outputText value="#{bundle.ViewPublicAlbumLabel_trackNum}"/>
-                        <h:outputText value="#{publicAlbumController.selected.trackNum}" title="#{bundle.ViewPublicAlbumTitle_trackNum}"/>
+                        <h:outputText value="#{publicAlbumController.selected.trackNum}"/>
+                        
+                        <!-- Album Genres -->
                         <h:outputText value="#{bundle.ViewPublicAlbumLabel_genres}"/>
-                        <h:outputText value="#{publicAlbumController.selected.genres}" title="#{bundle.ViewPublicAlbumTitle_genres}"/>
+                        <h:outputText value="#{publicAlbumController.selected.genres}"/>
+                        
+                        <!-- Album Average Price -->
                         <h:outputText value="#{bundle.ViewPublicAlbumLabel_averagePrice}"/>
-                        <h:outputText value="#{publicAlbumController.selected.averagePrice}" title="#{bundle.ViewPublicAlbumTitle_averagePrice}"/>
+                        <h:outputText value="#{publicAlbumController.selected.averagePrice}"/>
+                        
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PublicAlbumViewDialog.hide()"/>
                 </h:panelGroup>
+                
+                <h:panelGroup>
+                    <br />
+                    <div align="center">
+                        <!-- CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('PublicAlbumViewDialog').hide()" 
+                                         icon="fas fa-window-close"/>
+                    </div>
+                </h:panelGroup>
+                
             </h:form>
         </p:dialog>
 

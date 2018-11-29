@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Afiq Yusof on 2018.11.28 
+Copyright © 2018 Afiq Yusof. All rights reserved.
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -8,34 +12,60 @@
 
     <ui:composition>
 
-        <p:dialog id="PublicMovieViewDlg" widgetVar="PublicMovieViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicMovieTitle}">
+        <p:dialog id="PublicMovieViewDlg" widgetVar="PublicMovieViewDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicMovieTitle}">
             <h:form id="PublicMovieViewForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{publicMovieController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPublicMovieLabel_id}"/>
-                        <h:outputText value="#{publicMovieController.selected.id}" title="#{bundle.ViewPublicMovieTitle_id}"/>
+                <h:panelGroup id="display" class="ui-datagrid-data">
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{publicMovieController.selected != null}">
+                        
+                        <!-- Movie Title -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_title}"/>
-                        <h:outputText value="#{publicMovieController.selected.title}" title="#{bundle.ViewPublicMovieTitle_title}"/>
+                        <h:outputText value="#{publicMovieController.selected.title}"/>
+                        
+                        <!-- Movie YouTube Trailer ID -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_youtubeTrailerId}"/>
-                        <h:outputText value="#{publicMovieController.selected.youtubeTrailerId}" title="#{bundle.ViewPublicMovieTitle_youtubeTrailerId}"/>
+                        <h:outputText value="#{publicMovieController.selected.youtubeTrailerId}"/>
+                        
+                        <!-- Movie Genres -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_genres}"/>
-                        <h:outputText value="#{publicMovieController.selected.genres}" title="#{bundle.ViewPublicMovieTitle_genres}"/>
+                        <h:outputText value="#{publicMovieController.selected.genres}"/>
+                        
+                        <!-- Movie Release Date -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_releaseDate}"/>
-                        <h:outputText value="#{publicMovieController.selected.releaseDate}" title="#{bundle.ViewPublicMovieTitle_releaseDate}">
+                        <h:outputText value="#{publicMovieController.selected.releaseDate}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
+                        
+                        <!-- Movie Director -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_director}"/>
-                        <h:outputText value="#{publicMovieController.selected.director}" title="#{bundle.ViewPublicMovieTitle_director}"/>
+                        <h:outputText value="#{publicMovieController.selected.director}"/>
+                        
+                        <!-- Movie Stars -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_stars}"/>
-                        <h:outputText value="#{publicMovieController.selected.stars}" title="#{bundle.ViewPublicMovieTitle_stars}"/>
+                        <h:outputText value="#{publicMovieController.selected.stars}"/>
+                        
+                        <!-- Movie Film Rating -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_filmRating}"/>
-                        <h:outputText value="#{publicMovieController.selected.filmRating}" title="#{bundle.ViewPublicMovieTitle_filmRating}"/>
+                        <h:outputText value="#{publicMovieController.selected.filmRating}"/>
+                        
+                        <!-- Movie Percent Liked -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_percentLiked}"/>
-                        <h:outputText value="#{publicMovieController.selected.percentLiked}" title="#{bundle.ViewPublicMovieTitle_percentLiked}"/>
+                        <h:outputText value="#{publicMovieController.selected.percentLiked}"/>
+                        
+                        <!-- Movie Price Average -->
                         <h:outputText value="#{bundle.ViewPublicMovieLabel_averagePrice}"/>
-                        <h:outputText value="#{publicMovieController.selected.averagePrice}" title="#{bundle.ViewPublicMovieTitle_averagePrice}"/>
+                        <h:outputText value="#{publicMovieController.selected.averagePrice}"/>
+                        
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PublicMovieViewDialog.hide()"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <br />
+                    <div align="center">
+                        <!-- CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('PublicMovieViewDialog').hide()" 
+                                         icon="fas fa-window-close"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
