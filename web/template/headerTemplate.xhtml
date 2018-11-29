@@ -36,7 +36,7 @@ Copyright © 2018 Jacob Benjamin. All rights reserved.
                         <h:link outcome="/index">
                             <img src="#{resource['images:CloudlistLogo.png']}"
                                  style="width:100%; height:100%; max-height:64px; max-width:239px; border: none"
-                                 alt="BevQ Logo" />
+                                 alt="CloudList Logo" />
                         </h:link>
 
                     </td>
@@ -123,10 +123,6 @@ Copyright © 2018 Jacob Benjamin. All rights reserved.
                                     <h:link outcome="/userAccount/CreateAccount" class="standardText">
                                         <i class="fas fa-user-plus"></i>&nbsp;Create an Account
                                     </h:link>
-                                    
-                                    <h:link outcome="/SignIn" class="standardText">
-                                        <i class="fas fa-pencil-alt"></i>&nbsp;Take Questionnaire
-                                    </h:link>
                                 </c:if>
 
                                 <!-- 
@@ -134,12 +130,16 @@ Copyright © 2018 Jacob Benjamin. All rights reserved.
                                 |   Common Menu Options   |
                                 ===========================
                                 -->
-                                <h:link outcome="/UserGuide" class="standardText">
-                                    <i class="fas fa-book"></i>&nbsp;User Guide
+                                <h:link outcome="/publicAlbum/List" class="standardText">
+                                    <i class="fas fa-compact-disc"></i>&nbsp;Public Album List
                                 </h:link>
 
-                                <h:link outcome="/About" class="standardText">
-                                    <i class="fas fa-info-circle"></i>&nbsp;About
+                                <h:link outcome="/publicBook/List" class="standardText">
+                                    <i class="fas fa-book"></i>&nbsp;Public Book List
+                                </h:link>
+                                
+                                <h:link outcome="/publicMovie/List" class="standardText">
+                                    <i class="fas fa-film"></i>&nbsp;Public Movie List
                                 </h:link>
                             </div>
                         </div>
