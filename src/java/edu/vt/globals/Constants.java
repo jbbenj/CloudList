@@ -1,6 +1,6 @@
 /*
- * Created by Muhammad Afiq Yusof on 2018.11.02  * 
- * Copyright © 2018 Muhammad Afiq Yusof. All rights reserved. * 
+ * Created by Afiq Yusof on 2018.11.02  * 
+ * Copyright © 2018 Afiq Yusof. All rights reserved. * 
  */
 package edu.vt.globals;
 
@@ -38,8 +38,9 @@ public final class Constants {
     
     macOS (Unix or Linux): Specify the absolute directory path as shown below.
      */
-    public static final String PHOTOS_ABSOLUTE_PATH = "/home/cloudsd/Yusof/DocRoot/PizzaHutStorage";
-
+    //public static final String PHOTOS_ABSOLUTE_PATH = "/home/cloudsd/Yusof/DocRoot/PizzaHutStorage";
+    public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/muhda/DocRoot/CloudListStorage/";
+    
     /*
     In glassfish-web.xml, we specified an alternate document root (DocRoot) with the statement below
     to allow our application to read and write files external to (outside of) its deployed directory.
@@ -87,8 +88,8 @@ public final class Constants {
         <> the app name starting with slash, e.g., /PizzaHut-Balci, if an external file is referenced or
         <> the URI of the Web Pages folder of the application if an internal file is referenced.
      */
-    public static final String PHOTOS_RELATIVE_PATH = "/PizzaHutStorage/";
-    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "/PizzaHutStorage/defaultUserPhoto.png";
+    public static final String PHOTOS_RELATIVE_PATH = "/CloudListStorage/";
+    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "/CloudListStorage/defaultUserPhoto.png";
 
     /* 
     ==================================================

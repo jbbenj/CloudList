@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Created by Jacob Benjamin on 2018.11.08
-Copyright © 2018 Jacob Benjamin. All rights reserved.
+Created by Afiq Yusof & Jacob Benjamin on 2018.12.02
+Copyright © 2018 Afiq Yusof & Jacob Benjamin. All rights reserved.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -78,41 +78,6 @@ Copyright © 2018 Jacob Benjamin. All rights reserved.
                                 </h:link>
 
                                 <!-- 
-                                ===========================================
-                                |   Menu Options IF a User is Signed In   |
-                                ===========================================
-                                -->
-                                <c:if test="#{userController.isLoggedIn() == true}">
-                                    <h:link outcome="/userAlbum/List" class="standardText" >
-                                        <i class="fas fa-compact-disc"></i>&nbsp;My Albums
-                                    </h:link>
-                                    
-                                    <h:link outcome="/userBook/List" class="standardText" >
-                                        <i class="fas fa-book"></i>&nbsp;My Books
-                                    </h:link>
-                                    
-                                    <h:link outcome="/userMovie/List" class="standardText" >
-                                        <i class="fas fa-film"></i>&nbsp;My Movies
-                                    </h:link>
-
-                                    <!-- Clicking "My Account" displays the Profile.xhtml file -->
-                                    <h:link outcome="/userAccount/Profile" class="standardText">
-                                        <!-- 
-                                        Display the user's photo in a small circle. The cache="false" option
-                                        enables immediate display of a newly uploaded photo without using cache.
-                                        -->
-                                        <p:graphicImage cache="false" class="smallProfilePhoto" 
-                                                        value="#{userController.userPhoto()}"/>&nbsp;&nbsp;My Account
-                                    </h:link>
-                                    
-                                    <!-- Clicking "Sign Out" invokes userController's logout() method -->
-                                    <h:commandLink action="#{userController.logout()}" class="standardText" >
-                                        <i class="fas fa-sign-out-alt"></i>&nbsp;Sign Out
-                                    </h:commandLink>
-                                    
-                                </c:if>
-
-                                <!-- 
                                 ============================================
                                 |   Menu Options IF No User is Signed In   |
                                 ============================================
@@ -130,10 +95,51 @@ Copyright © 2018 Jacob Benjamin. All rights reserved.
                                 </c:if>
 
                                 <!-- 
+                                ===========================================
+                                |   Menu Options IF a User is Signed In   |
+                                ===========================================
+                                -->
+                                <c:if test="#{userController.isLoggedIn() == true}">
+                                    
+                                    <!-- Clicking "My Account" displays the Profile.xhtml file -->
+                                    <h:link outcome="/userAccount/Profile" class="standardText">
+                                        <!-- 
+                                        Display the user's photo in a small circle. The cache="false" option
+                                        enables immediate display of a newly uploaded photo without using cache.
+                                        -->
+                                        <p:graphicImage cache="false" class="smallProfilePhoto" 
+                                                        value="#{userController.userPhoto()}"/>&nbsp;&nbsp;My Account
+                                    </h:link>
+                                    
+                                    <!-- Clicking "Sign Out" invokes userController's logout() method -->
+                                    <h:commandLink action="#{userController.logout()}" class="standardText" >
+                                        <i class="fas fa-sign-out-alt"></i>&nbsp;Sign Out
+                                    </h:commandLink>
+                                    
+                                    <h:outputLabel class="standardText" value="──────────────────" />
+                                    
+                                    <h:link outcome="/userAlbum/List" class="standardText" >
+                                        <i class="fas fa-compact-disc"></i>&nbsp;My Albums
+                                    </h:link>
+                                    
+                                    <h:link outcome="/userBook/List" class="standardText" >
+                                        <i class="fas fa-book"></i>&nbsp;My Books
+                                    </h:link>
+                                    
+                                    <h:link outcome="/userMovie/List" class="standardText" >
+                                        <i class="fas fa-film"></i>&nbsp;My Movies
+                                    </h:link>
+                                    
+                                </c:if>
+                                
+                                <!-- 
                                 ===========================
                                 |   Common Menu Options   |
                                 ===========================
                                 -->
+                                
+                                <h:outputLabel class="standardText" value="──────────────────" />
+                                
                                 <h:link outcome="/publicAlbum/List" class="standardText">
                                     <i class="fas fa-compact-disc"></i>&nbsp;Public Album List
                                 </h:link>
