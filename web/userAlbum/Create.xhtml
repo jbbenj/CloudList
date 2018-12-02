@@ -8,40 +8,63 @@
 
     <ui:composition>
 
-        <p:dialog id="UserAlbumCreateDlg" widgetVar="UserAlbumCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserAlbumTitle}">
-            <h:form id="UserAlbumCreateForm">
+        <p:dialog id="UserAlbumCreateDlg" widgetVar="UserAlbumCreateDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateUserAlbumTitle}">
+            <h:form id="UserAlbumCreateForm" class="ui-datatable-data">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{userAlbumController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUserAlbumLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{userAlbumController.selected.id}" title="#{bundle.CreateUserAlbumTitle_id}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_id}"/>
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{userAlbumController.selected != null}">
+                        
+                        <!-- Title -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_title}" for="title" />
-                        <p:inputText id="title" value="#{userAlbumController.selected.title}" title="#{bundle.CreateUserAlbumTitle_title}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_title}"/>
+                        <p:inputText id="title" value="#{userAlbumController.selected.title}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_title}"/>
+                        
+                        <!-- Artist -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_artist}" for="artist" />
-                        <p:inputText id="artist" value="#{userAlbumController.selected.artist}" title="#{bundle.CreateUserAlbumTitle_artist}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_artist}"/>
+                        <p:inputText id="artist" value="#{userAlbumController.selected.artist}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_artist}"/>
+                        
+                        <!-- Album -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_album}" for="album" />
-                        <p:inputText id="album" value="#{userAlbumController.selected.album}" title="#{bundle.CreateUserAlbumTitle_album}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_album}"/>
+                        <p:inputText id="album" value="#{userAlbumController.selected.album}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_album}"/>
+                        
+                        <!-- Release Year -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_releaseYear}" for="releaseYear" />
-                        <p:inputText id="releaseYear" value="#{userAlbumController.selected.releaseYear}" title="#{bundle.CreateUserAlbumTitle_releaseYear}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_releaseYear}"/>
+                        <p:inputText id="releaseYear" value="#{userAlbumController.selected.releaseYear}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_releaseYear}"/>
+                        
+                        <!-- Number of Tracks -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_trackNum}" for="trackNum" />
-                        <p:inputText id="trackNum" value="#{userAlbumController.selected.trackNum}" title="#{bundle.CreateUserAlbumTitle_trackNum}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_trackNum}"/>
+                        <p:inputText id="trackNum" value="#{userAlbumController.selected.trackNum}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_trackNum}"/>
+                        
+                        <!-- Genres -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_genres}" for="genres" />
-                        <p:inputText id="genres" value="#{userAlbumController.selected.genres}" title="#{bundle.CreateUserAlbumTitle_genres}" required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_genres}"/>
+                        <p:inputText id="genres" value="#{userAlbumController.selected.genres}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.CreateUserAlbumRequiredMessage_genres}"/>
+                        
+                        <!-- Average Price -->
                         <p:outputLabel value="#{bundle.CreateUserAlbumLabel_averagePrice}" for="averagePrice" />
-                        <p:inputText id="averagePrice" value="#{userAlbumController.selected.averagePrice}" title="#{bundle.CreateUserAlbumTitle_averagePrice}" />
-                        <p:outputLabel value="#{bundle.CreateUserAlbumLabel_userId}" for="userId" />
-                        <p:selectOneMenu id="userId" value="#{userAlbumController.selected.userId}" >
-                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
-                                           var="userIdItem"
-                                           itemValue="#{userIdItem}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="averagePrice" value="#{userAlbumController.selected.averagePrice}" class="inputTextField" />
+                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userAlbumController.create}" value="#{bundle.Save}" 
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <br />
+                    <div align="center">
+                        <!-- SAVE button -->
+                        <p:commandButton actionListener="#{userAlbumController.create}" value="#{bundle.Save}" 
                                          icon="fas fa-save" ajax="false"
                                          update="display,:userAlbumListForm:datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
-                                         oncomplete="handleSubmit(args,'MovieCreateDialog');" />
-                    
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserAlbumCreateDialog').hide()" 
+                                         oncomplete="handleSubmit(args,'UserAlbumCreateDialog');" />
+                        &nbsp;
+                        <!-- CANCEL button -->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserAlbumCreateDialog').hide()" 
                                          icon="fas fa-ban" immediate="true" />
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

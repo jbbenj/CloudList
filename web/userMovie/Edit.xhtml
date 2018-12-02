@@ -8,40 +8,79 @@
 
     <ui:composition>
 
-        <p:dialog id="UserMovieEditDlg" widgetVar="UserMovieEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUserMovieTitle}">
-            <h:form id="UserMovieEditForm">
+        <p:dialog id="UserMovieEditDlg" widgetVar="UserMovieEditDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="#{bundle.EditUserMovieTitle}">
+            <h:form id="UserMovieEditForm" class="ui-datatable-data">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{userMovieController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUserMovieLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{userMovieController.selected.id}" title="#{bundle.EditUserMovieTitle_id}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_id}"/>
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{userMovieController.selected != null}">
+                        
+                        <!-- Title -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_title}" for="title" />
-                        <p:inputText id="title" value="#{userMovieController.selected.title}" title="#{bundle.EditUserMovieTitle_title}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_title}"/>
+                        <p:inputText id="title" value="#{userMovieController.selected.title}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_title}"/>
+                        
+                        <!-- YouTube Trailer ID -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_youtubeTrailerId}" for="youtubeTrailerId" />
-                        <p:inputText id="youtubeTrailerId" value="#{userMovieController.selected.youtubeTrailerId}" title="#{bundle.EditUserMovieTitle_youtubeTrailerId}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_youtubeTrailerId}"/>
+                        <p:inputText id="youtubeTrailerId" value="#{userMovieController.selected.youtubeTrailerId}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_youtubeTrailerId}"/>
+                        
+                        <!-- Genres -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_genres}" for="genres" />
-                        <p:inputText id="genres" value="#{userMovieController.selected.genres}" title="#{bundle.EditUserMovieTitle_genres}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_genres}"/>
+                        <p:inputText id="genres" value="#{userMovieController.selected.genres}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_genres}"/>
+                        
+                        <!-- Release Date -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_releaseDate}" for="releaseDate" />
-                        <p:calendar id="releaseDate" pattern="MM/dd/yyyy" value="#{userMovieController.selected.releaseDate}" title="#{bundle.EditUserMovieTitle_releaseDate}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_releaseDate}" showOn="button"/>
+                        <p:calendar id="releaseDate" pattern="MM/dd/yyyy" value="#{userMovieController.selected.releaseDate}" class="inputTextField"
+                                    required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_releaseDate}" mask="true"/>
+                        
+                        <!-- Director -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_director}" for="director" />
-                        <p:inputText id="director" value="#{userMovieController.selected.director}" title="#{bundle.EditUserMovieTitle_director}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_director}"/>
+                        <p:inputText id="director" value="#{userMovieController.selected.director}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_director}"/>
+                        
+                        <!-- Stars -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_stars}" for="stars" />
-                        <p:inputText id="stars" value="#{userMovieController.selected.stars}" title="#{bundle.EditUserMovieTitle_stars}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_stars}"/>
-                        <p:outputLabel value="#{bundle.EditUserMovieLabel_filmRating}" for="filmRating" />
-                        <p:inputText id="filmRating" value="#{userMovieController.selected.filmRating}" title="#{bundle.EditUserMovieTitle_filmRating}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_filmRating}"/>
+                        <p:inputText id="stars" value="#{userMovieController.selected.stars}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_stars}"/>
+                        
+                        <!-- Film Rating -->
+                        <p:outputLabel id="mpaaRatingEntry" value="#{bundle.EditUserMovieLabel_filmRating}" for="filmRating" >
+                            &nbsp;<i class="fas fa-question-circle" />
+                            <p:tooltip for="mpaaRatingEntry" value="Acceptable MPAA film ratings: G, PG, PG-13, R, NC-17" 
+                                       showEffect="clip" hideEffect="explode" position="top" /> 
+                        </p:outputLabel>
+                        <p:inputText id="filmRating" value="#{userMovieController.selected.filmRating}" class="inputTextField"
+                                     required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_filmRating}" >
+                            <f:validator validatorId="mpaaRatingValidator"/>
+                        </p:inputText>
+                        
+                        <!-- Percent Liked -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_percentLiked}" for="percentLiked" />
-                        <p:inputText id="percentLiked" value="#{userMovieController.selected.percentLiked}" title="#{bundle.EditUserMovieTitle_percentLiked}" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_percentLiked}"/>
+                        <p:inputMask id="percentLiked" value="#{userMovieController.selected.percentLiked}" class="inputTextField"
+                                     mask="99%" required="true" requiredMessage="#{bundle.EditUserMovieRequiredMessage_percentLiked}"/>
+                        
+                        <!-- Average Price -->
                         <p:outputLabel value="#{bundle.EditUserMovieLabel_averagePrice}" for="averagePrice" />
-                        <p:inputText id="averagePrice" value="#{userMovieController.selected.averagePrice}" title="#{bundle.EditUserMovieTitle_averagePrice}" />
-                        <p:outputLabel value="#{bundle.EditUserMovieLabel_userId}" for="userId" />
-                        <p:selectOneMenu id="userId" value="#{userMovieController.selected.userId}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
-                                           var="userIdItem"
-                                           itemValue="#{userIdItem}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="averagePrice" value="#{userMovieController.selected.averagePrice}" class="inputTextField"/>
+                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userMovieController.update}" value="#{bundle.Save}" update="display,:UserMovieListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserMovieEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserMovieEditDialog.hide()"/>
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <br />
+                    <div align="center">
+                        <!-- SAVE button -->
+                        <p:commandButton actionListener="#{userMovieController.update}" value="#{bundle.Save}" 
+                                         icon="fas fa-save" ajax="false"
+                                         update="display,:UserMovieListForm:datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                         oncomplete="handleSubmit(args, 'UserMovieEditDialog');"/>
+                        &nbsp;
+                        <!-- CANCEL button -->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserMovieEditDialog').hide()" 
+                                         icon="fas fa-ban" immediate="true" />
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -27,10 +27,11 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                      rowKey="#{item.id}"
                                      rows="10"
                                      rowsPerPageTemplate="10,20,30,40,50"
+                                     class="dataTable"
                                      >
 
-                            <p:ajax event="rowSelect"   update="viewButton"/>
-                            <p:ajax event="rowUnselect" update="viewButton"/>
+                            <p:ajax event="rowSelect"   update="viewButton playButton"/>
+                            <p:ajax event="rowUnselect" update="viewButton playButton"/>
 
                             <!-- Movie Title -->
                             <p:column sortBy="#{item.title}" headerText="#{bundle.ListPublicMovieTitle_title}" >
@@ -38,8 +39,11 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                             </p:column>
 
                             <!-- Movie YouTube Trailer ID -->
-                            <p:column sortBy="#{item.youtubeTrailerId}" headerText="#{bundle.ListPublicMovieTitle_youtubeTrailerId}" >
-                                <h:outputText class="standardText" value="#{item.youtubeTrailerId}"/>
+                            <p:column headerText="#{bundle.ListPublicMovieTitle_youtubeTrailerId}" >
+                                <div align="center">
+                                    <h:graphicImage value="https://i1.ytimg.com/vi/#{item.youtubeTrailerId}/hqdefault.jpg" 
+                                                    class="thumbnailImage" />
+                                </div>
                             </p:column>
 
                             <!-- Movie Genres -->
@@ -48,8 +52,11 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                             </p:column>
 
                             <!-- Movie Release Date -->
-                            <p:column sortBy="#{item.releaseDate}" headerText="#{bundle.ListPublicMovieTitle_releaseDate}" >
-                                <h:outputText class="standardText" value="#{item.releaseDate}"/>
+                            <p:column sortBy="#{item.releaseDate}" headerText="#{bundle.ListPublicMovieTitle_releaseDate}" 
+                                      style="text-align:center; width:100px;">
+                                <h:outputText class="standardText" value="#{item.releaseDate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
                             </p:column>
 
                             <!-- Movie Director -->
@@ -63,12 +70,14 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                             </p:column>
 
                             <!-- Movie Film Rating -->
-                            <p:column sortBy="#{item.filmRating}" headerText="#{bundle.ListPublicMovieTitle_filmRating}" >
+                            <p:column sortBy="#{item.filmRating}" headerText="#{bundle.ListPublicMovieTitle_filmRating}" 
+                                      style="text-align:center; width:60px;">
                                 <h:outputText class="standardText" value="#{item.filmRating}"/>
                             </p:column>
 
                             <!-- Movie Percent Liked -->
-                            <p:column sortBy="#{item.percentLiked}" headerText="#{bundle.ListPublicMovieTitle_percentLiked}" >
+                            <p:column sortBy="#{item.percentLiked}" headerText="#{bundle.ListPublicMovieTitle_percentLiked}" 
+                                      style="text-align:center; width:70px;">
                                 <h:outputText class="standardText" value="#{item.percentLiked}"/>
                             </p:column>
 
@@ -81,6 +90,9 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
                                                  update=":PublicMovieViewForm" oncomplete="PF('PublicMovieViewDialog').show()"
                                                  disabled="#{empty publicMovieController.selected}"/>
+                                <p:commandButton id="playButton"    icon="fas fa-play" value="#{bundle.Play}" 
+                                                 update=":PublicMovieTrailerPlayForm" oncomplete="PF('PublicMovieTrailerPlayDialog').show()" 
+                                                 disabled="#{empty publicMovieController.selected}" />
                             </f:facet>
                         </p:dataTable>
                     </p:panel>
@@ -88,6 +100,34 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
 
                 <ui:include src="View.xhtml"/>
             </div>
+            
+            <!-- 
+            ==================================================================
+            Dialog Showing YouTube Player to Play the Selected Movie's Trailer
+            ==================================================================
+            -->
+            <p:dialog position="center center" id="PublicMovieTrailerPlayDlg" widgetVar="PublicMovieTrailerPlayDialog" 
+                      modal="true" resizable="true" appendTo="@(body)" header="Play Movie Trailer" 
+                      width="90%" >
+
+                <h:form id="PublicMovieTrailerPlayForm">
+
+                    <div align="center">
+                        <br />
+                        <div class="responsive-container">
+                            <iframe class="responsive-iframe" 
+                                    src="https://www.youtube.com/embed/#{publicMovieController.selected.youtubeTrailerId}"
+                                    gesture="media"  allow="encrypted-media" allowfullscreen="true" >
+                            </iframe>
+                        </div>
+                        <br />
+                        <!-- CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('PublicMovieTrailerPlayDialog').hide()"
+                                         icon="fas fa-window-close"/>
+                    </div>
+                </h:form>  
+            </p:dialog>
+            
         </ui:define>
     </ui:composition>
 
