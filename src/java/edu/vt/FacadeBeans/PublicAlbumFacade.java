@@ -27,5 +27,15 @@ public class PublicAlbumFacade extends AbstractFacade<PublicAlbum> {
     public PublicAlbumFacade() {
         super(PublicAlbum.class);
     }
-    
+    /*
+    public PublicAlbum findById(Integer id) {
+        if (em.createQuery("SELECT p FROM PublicVideo p WHERE p.title LIKE '%" + title + "%'")
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (List<PublicVideo>) (em.createQuery("SELECT p FROM PublicVideo p WHERE p.title LIKE '%" + title + "%'")
+                    .getResultList());
+        }
+    }
+    */
 }

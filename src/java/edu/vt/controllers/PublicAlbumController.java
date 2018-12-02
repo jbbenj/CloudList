@@ -1,6 +1,7 @@
 package edu.vt.controllers;
 
 import edu.vt.EntityBeans.PublicAlbum;
+import edu.vt.EntityBeans.UserAlbum;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.PublicAlbumFacade;
@@ -162,4 +163,27 @@ public class PublicAlbumController implements Serializable {
 
     }
 
+    public void sell(UserAlbum albumToSell) {
+
+        PublicAlbum newAlbum = new PublicAlbum();
+
+        newAlbum.setArtist(albumToSell.getArtist());
+        newAlbum.setGenres(albumToSell.getGenres());
+        newAlbum.setReleaseYear(albumToSell.getReleaseYear());
+        newAlbum.setId(albumToSell.getId());
+        newAlbum.setTitle(albumToSell.getTitle());
+        newAlbum.setTrackNum(albumToSell.getTrackNum());
+
+        setSelected(newAlbum);
+        create();
+
+    }
+
+    public void unsell(UserAlbum albumToUnsell) {
+        
+        PublicAlbum foundAlbum = getFacade().find(albumToUnsell.getId());
+        setSelected(foundAlbum);
+        destroy();
+    }
+    
 }
