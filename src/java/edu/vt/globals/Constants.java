@@ -39,7 +39,7 @@ public final class Constants {
     macOS (Unix or Linux): Specify the absolute directory path as shown below.
      */
     //public static final String PHOTOS_ABSOLUTE_PATH = "/home/cloudsd/Yusof/DocRoot/PizzaHutStorage";
-    public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/muhda/DocRoot/CloudListStorage/";
+    public static final String PHOTOS_ABSOLUTE_PATH = "/Users/benjamin/DocRoot/CloudListStorage/";
     
     /*
     In glassfish-web.xml, we specified an alternate document root (DocRoot) with the statement below
