@@ -1,6 +1,7 @@
 package edu.vt.controllers;
 
 import edu.vt.EntityBeans.PublicAlbum;
+import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserAlbum;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
@@ -24,6 +25,9 @@ import javax.faces.convert.FacesConverter;
 @SessionScoped
 public class PublicAlbumController implements Serializable {
 
+    @EJB
+    private edu.vt.FacadeBeans.UserFacade userFacade;
+    
     @EJB
     private edu.vt.FacadeBeans.PublicAlbumFacade ejbFacade;
     private List<PublicAlbum> items = null;
@@ -170,9 +174,10 @@ public class PublicAlbumController implements Serializable {
         newAlbum.setArtist(albumToSell.getArtist());
         newAlbum.setGenres(albumToSell.getGenres());
         newAlbum.setReleaseYear(albumToSell.getReleaseYear());
-        newAlbum.setId(albumToSell.getId());
         newAlbum.setTitle(albumToSell.getTitle());
         newAlbum.setTrackNum(albumToSell.getTrackNum());
+        newAlbum.setAveragePrice(albumToSell.getAveragePrice());
+        newAlbum.setUserId(albumToSell.getUserId().getId());
 
         setSelected(newAlbum);
         create();
@@ -180,10 +185,17 @@ public class PublicAlbumController implements Serializable {
     }
 
     public void unsell(UserAlbum albumToUnsell) {
+        PublicAlbum foundAlbum = getFacade().findByUserId(albumToUnsell.getUserId().getId());
         
-        PublicAlbum foundAlbum = getFacade().find(albumToUnsell.getId());
         setSelected(foundAlbum);
         destroy();
     }
     
+    public boolean isPublic(UserAlbum albumToCheck) {
+        PublicAlbum album = getFacade().findByUserId(albumToCheck.getUserId().getId());
+        
+        if (album != null)
+            return true;
+        return false;
+    }
 }

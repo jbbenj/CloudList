@@ -79,7 +79,7 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 <p:commandButton id="sellButton"   icon="fas fa-star" value="#{bundle.Sell}"
                                                  actionListener="#{publicAlbumController.sell(userAlbumController.selected)}"
                                                  update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
-                                                 disabled="#{empty userAlbumController.selected}">
+                                                 disabled="#{empty userAlbumController.selected || publicAlbumController.isPublic(userAlbumController.selected)}">
                                     <p:confirm header="Sell Confirmation" 
                                                message="Are you sure you want to add the selected album to the Public Album List for sale?" 
                                                icon="fas fa-exclamation-triangle fa-2x" />

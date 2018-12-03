@@ -67,6 +67,27 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
                                                  update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
                                                  disabled="#{empty publicAlbumController.selected}"/>
+                                
+                                <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
+                                                 actionListener="#{publicAlbumController.destroy}" 
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                                 disabled="#{empty publicAlbumController.selected}">
+
+                                    <p:confirm header="Deletion Confirmation" 
+                                               message="Are you sure you want to permanently delete the selected movie from the database?" 
+                                               icon="fas fa-exclamation-triangle fa-2x" />
+                                </p:commandButton>
+                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="slide" hideEffect="fade">
+                                    <div align="center">
+                                        <!-- The value of the first button listed below will be 
+                                        shown as highlighted (default action) when displayed -->
+                                        <p:commandButton value="No" type="button" 
+                                                         class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                        &nbsp;
+                                        <p:commandButton value="Yes" type="button" 
+                                                         class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                    </div>
+                                </p:confirmDialog>
                             </f:facet>
                         </p:dataTable>
                     </p:panel>

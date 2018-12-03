@@ -55,6 +55,7 @@ CREATE TABLE UserFile
 CREATE TABLE PublicMovie
 (
 	   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+       user_id INT UNSIGNED,
 	   title VARCHAR(255) NOT NULL,
 	   youtube_trailer_id VARCHAR(32) NOT NULL,
 	   genres VARCHAR(128) NOT NULL,
@@ -86,6 +87,7 @@ CREATE TABLE UserMovie
 CREATE TABLE PublicAlbum
 (
 	   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+       user_id INT UNSIGNED,
        title VARCHAR(255) NOT NULL,
        artist VARCHAR(128) NOT NULL,
 	   release_year INT UNSIGNED NOT NULL,
@@ -112,6 +114,7 @@ CREATE TABLE UserAlbum
 CREATE TABLE PublicBook
 (
 	   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+       user_id INT UNSIGNED,
        title VARCHAR(255) NOT NULL,
        author VARCHAR(128) NOT NULL,
        publication_year INT UNSIGNED NOT NULL,

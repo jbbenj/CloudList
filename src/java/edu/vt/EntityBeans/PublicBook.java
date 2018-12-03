@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PublicBook.findByAveragePrice", query = "SELECT p FROM PublicBook p WHERE p.averagePrice = :averagePrice")})
 public class PublicBook implements Serializable {
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -163,6 +166,14 @@ public class PublicBook implements Serializable {
     @Override
     public String toString() {
         return "edu.vt.EntityBeans.PublicBook[ id=" + id + " ]";
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
     
 }

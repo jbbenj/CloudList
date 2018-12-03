@@ -5,6 +5,7 @@
 package edu.vt.FacadeBeans;
 
 import edu.vt.EntityBeans.PublicAlbum;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,15 +28,15 @@ public class PublicAlbumFacade extends AbstractFacade<PublicAlbum> {
     public PublicAlbumFacade() {
         super(PublicAlbum.class);
     }
-    /*
-    public PublicAlbum findById(Integer id) {
-        if (em.createQuery("SELECT p FROM PublicVideo p WHERE p.title LIKE '%" + title + "%'")
+    
+    public PublicAlbum findByUserId(Integer userId) {
+        if (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId)
                 .getResultList().isEmpty()) {
             return null;
         } else {
-            return (List<PublicVideo>) (em.createQuery("SELECT p FROM PublicVideo p WHERE p.title LIKE '%" + title + "%'")
-                    .getResultList());
+            return (PublicAlbum) (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId)
+                    .getSingleResult());
         }
     }
-    */
+    
 }
