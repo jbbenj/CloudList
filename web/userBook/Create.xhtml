@@ -55,7 +55,7 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                     <br />
                     <div align="center">
                         <!-- SAVE button -->
-                        <p:commandButton actionListener="#{userBookController.create}" value="#{bundle.Save}" 
+                        <p:commandButton actionListener="#{userBookController.create(userController.selected)}" value="#{bundle.Save}" 
                                          icon="fas fa-save" ajax="false"
                                          update="display,:userBookListForm:datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
                                          oncomplete="handleSubmit(args,'UserBookCreateDialog');" />

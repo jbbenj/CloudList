@@ -100,10 +100,57 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 <p:commandButton id="playButton"    icon="fas fa-play" value="#{bundle.Play}" 
                                                  update=":UserMovieTrailerPlayForm" oncomplete="PF('UserMovieTrailerPlayDialog').show()" 
                                                  disabled="#{empty userMovieController.selected}" />
+                                
+                                <!-- Sell Button -->
+                                <p:commandButton id="sellButton"   icon="fas fa-star" value="#{bundle.Sell}"
+                                                 actionListener="#{publicMovieController.sell(userMovieController.selected)}"
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                                 disabled="#{empty userMovieController.selected || publicMovieController.isPublic(userMovieController.selected)}">
+                                    <p:confirm header="Sell Confirmation" 
+                                               message="Are you sure you want to add the selected movie to the Public Movie List for sale?" 
+                                               icon="fas fa-exclamation-triangle fa-2x" />
+                                </p:commandButton>
+                                <p:confirmDialog id="confirmSellDialogBox" global="true" showEffect="slide" hideEffect="fade">
+                                    <div align="center">
+                                        <!-- The value of the first button listed below will be 
+                                        shown as highlighted (default action) when displayed -->
+                                        <p:commandButton value="No" type="button" 
+                                                         class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                        &nbsp;
+                                        <p:commandButton value="Yes" type="button" 
+                                                         class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                    </div>
+                                </p:confirmDialog>
+                                
+                                <!-- Unsell Button -->
+                                <p:commandButton id="unsellButton" icon="far fa-star" value="#{bundle.Unsell}"
+                                                 actionListener="#{publicMovieController.unsell(userMovieController.selected)}"
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                                 disabled="#{empty userMovieController.selected || !publicMovieController.isPublic(userMovieController.selected)}">
+                                    <p:confirm header="Unsell Confirmation" 
+                                               message="Are you sure you want to remove the selected movie from sale?" 
+                                               icon="fas fa-exclamation-triangle fa-2x" />
+                                </p:commandButton>
+                                <p:confirmDialog id="confirmUnsellDialogBox" global="true" showEffect="slide" hideEffect="fade">
+                                    <div align="center">
+                                        <!-- The value of the first button listed below will be 
+                                        shown as highlighted (default action) when displayed -->
+                                        <p:commandButton value="No" type="button" 
+                                                         class="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                        &nbsp;
+                                        <p:commandButton value="Yes" type="button" 
+                                                         class="ui-confirmdialog-yes" icon="fas fa-check-square" />
+                                    </div>
+                                </p:confirmDialog>
+                                
+                                <!-- Delete Button -->
                                 <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
                                                  actionListener="#{userMovieController.destroy}" 
                                                  update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
                                                  disabled="#{empty userMovieController.selected}">
+                                    
+                                    <f:actionListener binding="#{publicMovieController.unsell(userMovieController.selected)}" />
+                                    <f:actionListener binding="#{userMovieController.destroy()}" />
                                     <p:confirm header="Deletion Confirmation" 
                                                message="Are you sure you want to permanently delete the selected movie from the database?" 
                                                icon="fas fa-exclamation-triangle fa-2x" />

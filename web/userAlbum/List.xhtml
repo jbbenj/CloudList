@@ -100,7 +100,7 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 <p:commandButton id="unsellButton" icon="far fa-star" value="#{bundle.Unsell}"
                                                  actionListener="#{publicAlbumController.unsell(userAlbumController.selected)}"
                                                  update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
-                                                 disabled="#{empty userAlbumController.selected}">
+                                                 disabled="#{empty userAlbumController.selected || !publicAlbumController.isPublic(userAlbumController.selected)}">
                                     <p:confirm header="Unsell Confirmation" 
                                                message="Are you sure you want to remove the selected album from sale?" 
                                                icon="fas fa-exclamation-triangle fa-2x" />
@@ -119,10 +119,11 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 
                                 <!-- Delete Button -->
                                 <p:commandButton id="deleteButton" icon="fas fa-trash-alt"  value="#{bundle.Delete}" 
-                                                 actionListener="#{userAlbumController.destroy}" 
                                                  update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
                                                  disabled="#{empty userAlbumController.selected}">
-
+                                    
+                                    <f:actionListener binding="#{publicAlbumController.unsell(userAlbumController.selected)}" />
+                                    <f:actionListener binding="#{userAlbumController.destroy()}" />
                                     <p:confirm header="Deletion Confirmation" 
                                                message="Are you sure you want to permanently delete the selected movie from the database?" 
                                                icon="fas fa-exclamation-triangle fa-2x" />

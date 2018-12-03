@@ -1,6 +1,8 @@
 package edu.vt.controllers;
 
 import edu.vt.EntityBeans.PublicBook;
+import edu.vt.EntityBeans.User;
+import edu.vt.EntityBeans.UserBook;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.PublicBookFacade;
@@ -162,4 +164,50 @@ public class PublicBookController implements Serializable {
 
     }
 
+    public void sell(UserBook bookToSell) {
+
+        PublicBook newBook = new PublicBook();
+
+        newBook.setAuthor(bookToSell.getAuthor());
+        newBook.setGenres(bookToSell.getGenres());
+        newBook.setPublicationYear(bookToSell.getPublicationYear());
+        newBook.setTitle(bookToSell.getTitle());
+        newBook.setIsbn(bookToSell.getIsbn());
+        newBook.setAveragePrice(bookToSell.getAveragePrice());
+        newBook.setUserId(bookToSell.getUserId().getId());
+        newBook.setUserVersionId(bookToSell.getId());
+
+        setSelected(newBook);
+        create();
+        
+    }
+    
+    public void unsell(UserBook bookToUnsell) {
+        PublicBook foundBook = getFacade().findByUserIdAndUserVersionId(bookToUnsell.getUserId().getId(), bookToUnsell.getId());
+        
+        setSelected(foundBook);
+        destroy();
+    }
+    
+    public boolean isPublic(UserBook bookToCheck) {
+        
+        /*
+        List<PublicBook> temp = getFacade().findAll();
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.println(temp.get(i).getTitle() + " " + temp.get(i).getId() + " " + temp.get(i).getUserId());
+        }
+        System.out.println("searching for: " + bookToCheck.getId() + " " + bookToCheck.getUserId().getId());
+        */
+        
+        User user = bookToCheck.getUserId();
+        if (user == null) {
+            return false;
+        }
+        
+        PublicBook book = getFacade().findByUserIdAndUserVersionId(user.getId(), bookToCheck.getId());
+        
+        if (book != null)
+            return true;
+        return false;
+    }
 }

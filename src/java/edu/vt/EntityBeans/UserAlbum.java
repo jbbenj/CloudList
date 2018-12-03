@@ -39,6 +39,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UserAlbum.findByAveragePrice", query = "SELECT u FROM UserAlbum u WHERE u.averagePrice = :averagePrice")})
 public class UserAlbum implements Serializable {
 
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "average_price")
+    private Float averagePrice;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,8 +77,6 @@ public class UserAlbum implements Serializable {
     @Size(min = 1, max = 128)
     @Column(name = "genres")
     private String genres;
-    @Column(name = "average_price")
-    private Integer averagePrice;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private User userId;
@@ -152,14 +154,6 @@ public class UserAlbum implements Serializable {
         this.genres = genres;
     }
 
-    public Integer getAveragePrice() {
-        return averagePrice;
-    }
-
-    public void setAveragePrice(Integer averagePrice) {
-        this.averagePrice = averagePrice;
-    }
-
     public User getUserId() {
         return userId;
     }
@@ -191,6 +185,14 @@ public class UserAlbum implements Serializable {
     @Override
     public String toString() {
         return "edu.vt.EntityBeans.UserAlbum[ id=" + id + " ]";
+    }
+
+    public Float getAveragePrice() {
+        return averagePrice;
+    }
+
+    public void setAveragePrice(Float averagePrice) {
+        this.averagePrice = averagePrice;
     }
     
 }

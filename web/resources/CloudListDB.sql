@@ -55,6 +55,7 @@ CREATE TABLE UserFile
 CREATE TABLE PublicMovie
 (
 	   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+       user_version_id INT UNSIGNED,
        user_id INT UNSIGNED,
 	   title VARCHAR(255) NOT NULL,
 	   youtube_trailer_id VARCHAR(32) NOT NULL,
@@ -64,7 +65,7 @@ CREATE TABLE PublicMovie
 	   stars VARCHAR(255) NOT NULL,
 	   film_rating VARCHAR(8) NOT NULL,   /* e.g., PG-13 */
 	   percent_liked VARCHAR(8) NOT NULL,
-       average_price INT UNSIGNED,
+       average_price FLOAT UNSIGNED,
 	   PRIMARY KEY (id)
 );
 
@@ -80,20 +81,21 @@ CREATE TABLE UserMovie
 	   stars VARCHAR(255) NOT NULL,
 	   film_rating VARCHAR(8) NOT NULL,   /* e.g., PG-13 */
 	   percent_liked VARCHAR(8) NOT NULL,
-       average_price INT UNSIGNED,
+       average_price FLOAT UNSIGNED,
 	   FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
 
 CREATE TABLE PublicAlbum
 (
 	   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+       user_version_id INT UNSIGNED,
        user_id INT UNSIGNED,
        title VARCHAR(255) NOT NULL,
        artist VARCHAR(128) NOT NULL,
 	   release_year INT UNSIGNED NOT NULL,
        track_num INT UNSIGNED NOT NULL,
        genres VARCHAR(128) NOT NULL,
-       average_price INT UNSIGNED,
+       average_price FLOAT UNSIGNED,
        PRIMARY KEY (id)
 );
 
@@ -107,20 +109,21 @@ CREATE TABLE UserAlbum
 	   release_year INT UNSIGNED NOT NULL,
        track_num INT UNSIGNED NOT NULL,
        genres VARCHAR(128) NOT NULL,
-       average_price INT UNSIGNED,
+       average_price FLOAT UNSIGNED,
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
 
 CREATE TABLE PublicBook
 (
 	   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+       user_version_id INT UNSIGNED,
        user_id INT UNSIGNED,
        title VARCHAR(255) NOT NULL,
        author VARCHAR(128) NOT NULL,
        publication_year INT UNSIGNED NOT NULL,
-       isbn INT UNSIGNED NOT NULL,
+       isbn BIGINT UNSIGNED NOT NULL,
        genres VARCHAR(128) NOT NULL,
-       average_price INT UNSIGNED,
+       average_price FLOAT UNSIGNED,
        PRIMARY KEY (id)
 );
 
@@ -131,8 +134,8 @@ CREATE TABLE UserBook
        title VARCHAR(255) NOT NULL,
        author VARCHAR(128) NOT NULL,
        publication_year INT UNSIGNED NOT NULL,
-       isbn INT UNSIGNED NOT NULL,
+       isbn BIGINT UNSIGNED NOT NULL,
        genres VARCHAR(128) NOT NULL,
-       average_price INT UNSIGNED,
+       average_price FLOAT UNSIGNED,
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );

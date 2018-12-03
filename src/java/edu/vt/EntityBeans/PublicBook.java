@@ -36,6 +36,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PublicBook.findByAveragePrice", query = "SELECT p FROM PublicBook p WHERE p.averagePrice = :averagePrice")})
 public class PublicBook implements Serializable {
 
+    @Column(name = "user_version_id")
+    private Integer userVersionId;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "isbn")
+    private double isbn;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "average_price")
+    private Float averagePrice;
+
     @Column(name = "user_id")
     private Integer userId;
 
@@ -61,15 +72,9 @@ public class PublicBook implements Serializable {
     private int publicationYear;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "isbn")
-    private int isbn;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "genres")
     private String genres;
-    @Column(name = "average_price")
-    private Integer averagePrice;
 
     public PublicBook() {
     }
@@ -119,28 +124,12 @@ public class PublicBook implements Serializable {
         this.publicationYear = publicationYear;
     }
 
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
     public String getGenres() {
         return genres;
     }
 
     public void setGenres(String genres) {
         this.genres = genres;
-    }
-
-    public Integer getAveragePrice() {
-        return averagePrice;
-    }
-
-    public void setAveragePrice(Integer averagePrice) {
-        this.averagePrice = averagePrice;
     }
 
     @Override
@@ -174,6 +163,30 @@ public class PublicBook implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public double getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(double isbn) {
+        this.isbn = isbn;
+    }
+
+    public Float getAveragePrice() {
+        return averagePrice;
+    }
+
+    public void setAveragePrice(Float averagePrice) {
+        this.averagePrice = averagePrice;
+    }
+
+    public Integer getUserVersionId() {
+        return userVersionId;
+    }
+
+    public void setUserVersionId(Integer userVersionId) {
+        this.userVersionId = userVersionId;
     }
     
 }

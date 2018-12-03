@@ -178,21 +178,27 @@ public class PublicAlbumController implements Serializable {
         newAlbum.setTrackNum(albumToSell.getTrackNum());
         newAlbum.setAveragePrice(albumToSell.getAveragePrice());
         newAlbum.setUserId(albumToSell.getUserId().getId());
+        newAlbum.setUserVersionId(albumToSell.getId());
 
         setSelected(newAlbum);
         create();
-
     }
 
     public void unsell(UserAlbum albumToUnsell) {
-        PublicAlbum foundAlbum = getFacade().findByUserId(albumToUnsell.getUserId().getId());
+        PublicAlbum foundAlbum = getFacade().findByUserIdAndUserVersionId(albumToUnsell.getUserId().getId(), albumToUnsell.getId());
         
         setSelected(foundAlbum);
         destroy();
     }
     
     public boolean isPublic(UserAlbum albumToCheck) {
-        PublicAlbum album = getFacade().findByUserId(albumToCheck.getUserId().getId());
+        
+        User user = albumToCheck.getUserId();
+        if (user == null) {
+            return false;
+        }
+        
+        PublicAlbum album = getFacade().findByUserIdAndUserVersionId(user.getId(), albumToCheck.getId());
         
         if (album != null)
             return true;

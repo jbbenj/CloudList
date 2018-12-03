@@ -5,6 +5,7 @@
 package edu.vt.FacadeBeans;
 
 import edu.vt.EntityBeans.PublicBook;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,4 +29,23 @@ public class PublicBookFacade extends AbstractFacade<PublicBook> {
         super(PublicBook.class);
     }
     
+    public List<PublicBook> findByUserId(Integer userId) {
+        if (em.createQuery("SELECT p FROM PublicBook p WHERE p.userId = " + userId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (List<PublicBook>) (em.createQuery("SELECT p FROM PublicBook p WHERE p.userId = " + userId)
+                    .getResultList());
+        }
+    }
+    
+    public PublicBook findByUserIdAndUserVersionId(Integer userId, Integer userVersionId) {
+        if (em.createQuery("SELECT p FROM PublicBook p WHERE p.userId = " + userId + " AND p.userVersionId = " + userVersionId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (PublicBook) (em.createQuery("SELECT p FROM PublicBook p WHERE p.userId = " + userId + " AND p.userVersionId = " + userVersionId)
+                    .getSingleResult());
+        }
+    }
 }

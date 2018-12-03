@@ -38,6 +38,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UserBook.findByAveragePrice", query = "SELECT u FROM UserBook u WHERE u.averagePrice = :averagePrice")})
 public class UserBook implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "isbn")
+    private double isbn;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "average_price")
+    private Float averagePrice;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,15 +68,9 @@ public class UserBook implements Serializable {
     private int publicationYear;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "isbn")
-    private int isbn;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "genres")
     private String genres;
-    @Column(name = "average_price")
-    private Integer averagePrice;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private User userId;
@@ -121,28 +123,12 @@ public class UserBook implements Serializable {
         this.publicationYear = publicationYear;
     }
 
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
     public String getGenres() {
         return genres;
     }
 
     public void setGenres(String genres) {
         this.genres = genres;
-    }
-
-    public Integer getAveragePrice() {
-        return averagePrice;
-    }
-
-    public void setAveragePrice(Integer averagePrice) {
-        this.averagePrice = averagePrice;
     }
 
     public User getUserId() {
@@ -176,6 +162,22 @@ public class UserBook implements Serializable {
     @Override
     public String toString() {
         return "edu.vt.EntityBeans.UserBook[ id=" + id + " ]";
+    }
+
+    public double getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(double isbn) {
+        this.isbn = isbn;
+    }
+
+    public Float getAveragePrice() {
+        return averagePrice;
+    }
+
+    public void setAveragePrice(Float averagePrice) {
+        this.averagePrice = averagePrice;
     }
     
 }

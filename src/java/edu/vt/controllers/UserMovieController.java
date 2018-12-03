@@ -1,5 +1,6 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserMovie;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
@@ -62,6 +63,14 @@ public class UserMovieController implements Serializable {
         }
     }
 
+    public void create(User user) {
+        selected.setUserId(user);
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UserMovieCreated"));
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserMovieUpdated"));
     }

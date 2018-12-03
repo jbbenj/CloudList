@@ -29,14 +29,23 @@ public class PublicAlbumFacade extends AbstractFacade<PublicAlbum> {
         super(PublicAlbum.class);
     }
     
-    public PublicAlbum findByUserId(Integer userId) {
+    public List<PublicAlbum> findByUserId(Integer userId) {
         if (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId)
                 .getResultList().isEmpty()) {
             return null;
         } else {
-            return (PublicAlbum) (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId)
-                    .getSingleResult());
+            return (List<PublicAlbum>) (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId)
+                    .getResultList());
         }
     }
     
+    public PublicAlbum findByUserIdAndUserVersionId(Integer userId, Integer userVersionId) {
+        if (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId + " AND p.userVersionId = " + userVersionId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (PublicAlbum) (em.createQuery("SELECT p FROM PublicAlbum p WHERE p.userId = " + userId + " AND p.userVersionId = " + userVersionId)
+                    .getSingleResult());
+        }
+    }
 }

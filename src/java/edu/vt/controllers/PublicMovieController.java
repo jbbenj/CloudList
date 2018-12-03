@@ -1,6 +1,8 @@
 package edu.vt.controllers;
 
 import edu.vt.EntityBeans.PublicMovie;
+import edu.vt.EntityBeans.User;
+import edu.vt.EntityBeans.UserMovie;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.PublicMovieFacade;
@@ -162,4 +164,45 @@ public class PublicMovieController implements Serializable {
 
     }
 
+    public void sell(UserMovie movieToSell) {
+
+        PublicMovie newMovie = new PublicMovie();
+
+        newMovie.setTitle(movieToSell.getTitle());
+        newMovie.setGenres(movieToSell.getGenres());
+        newMovie.setReleaseDate(movieToSell.getReleaseDate());
+        newMovie.setYoutubeTrailerId(movieToSell.getYoutubeTrailerId());
+        newMovie.setDirector(movieToSell.getDirector());
+        newMovie.setStars(movieToSell.getStars());
+        newMovie.setFilmRating(movieToSell.getFilmRating());
+        newMovie.setPercentLiked(movieToSell.getPercentLiked());
+        newMovie.setAveragePrice(movieToSell.getAveragePrice());
+        newMovie.setUserId(movieToSell.getUserId().getId());
+        newMovie.setUserVersionId(movieToSell.getId());
+
+        setSelected(newMovie);
+        create();
+    }
+
+    public void unsell(UserMovie movieToUnsell) {
+        PublicMovie foundMovie = getFacade().findByUserIdAndUserVersionId(movieToUnsell.getUserId().getId(), movieToUnsell.getId());
+        
+        setSelected(foundMovie);
+        destroy();
+    }
+    
+    public boolean isPublic(UserMovie movieToCheck) {
+        
+        User user = movieToCheck.getUserId();
+        if (user == null) {
+            return false;
+        }
+        
+        PublicMovie movie = getFacade().findByUserIdAndUserVersionId(user.getId(), movieToCheck.getId());
+        
+        if (movie != null)
+            return true;
+        return false;
+    }
+    
 }

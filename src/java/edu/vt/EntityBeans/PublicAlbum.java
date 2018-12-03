@@ -36,6 +36,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PublicAlbum.findByAveragePrice", query = "SELECT p FROM PublicAlbum p WHERE p.averagePrice = :averagePrice")})
 public class PublicAlbum implements Serializable {
 
+    @Column(name = "user_version_id")
+    private Integer userVersionId;
+
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "average_price")
+    private Float averagePrice;
+
     @Column(name = "user_id")
     private Integer userId;
 
@@ -68,8 +75,6 @@ public class PublicAlbum implements Serializable {
     @Size(min = 1, max = 128)
     @Column(name = "genres")
     private String genres;
-    @Column(name = "average_price")
-    private Integer averagePrice;
 
     public PublicAlbum() {
     }
@@ -135,14 +140,6 @@ public class PublicAlbum implements Serializable {
         this.genres = genres;
     }
 
-    public Integer getAveragePrice() {
-        return averagePrice;
-    }
-
-    public void setAveragePrice(Integer averagePrice) {
-        this.averagePrice = averagePrice;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -174,6 +171,22 @@ public class PublicAlbum implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Float getAveragePrice() {
+        return averagePrice;
+    }
+
+    public void setAveragePrice(Float averagePrice) {
+        this.averagePrice = averagePrice;
+    }
+
+    public Integer getUserVersionId() {
+        return userVersionId;
+    }
+
+    public void setUserVersionId(Integer userVersionId) {
+        this.userVersionId = userVersionId;
     }
     
 }
