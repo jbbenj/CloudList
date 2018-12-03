@@ -113,7 +113,7 @@ Style the div component whose unique id is "footer" per reference
 */
 #footer {
     position: fixed;
-    height: 100px;
+    height: 150px;
     width: 100%;
     left: 0px;
     right: 0px;
