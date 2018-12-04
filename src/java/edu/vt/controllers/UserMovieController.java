@@ -1,10 +1,13 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.Media;
+import edu.vt.EntityBeans.PublicMovie;
 import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserMovie;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.UserMovieFacade;
+import edu.vt.globals.Methods;
 
 import java.io.Serializable;
 import java.util.List;
@@ -95,7 +98,7 @@ public class UserMovieController implements Serializable {
 
     public List<UserMovie> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findByUserId((int) Methods.sessionMap().get("user_id"));
         }
         return items;
     }
@@ -181,4 +184,21 @@ public class UserMovieController implements Serializable {
 
     }
 
+    public void removeIfMatchType(List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media curr = medias.get(i);
+            if (curr.getType().equals("Movie")) {
+                UserMovie foundMovie = getFacade().find(curr.getUserVersionId());
+                setSelected(foundMovie);
+                destroy();
+            }
+        }
+    }
+    
+    public boolean isOwnItem(PublicMovie pubMovie) {
+        UserMovie userMovie = getFacade().findByUserIdAndUserVersionId((int) Methods.sessionMap().get("user_id"), pubMovie.getUserVersionId());
+        if (userMovie == null)
+            return false;
+        return true;
+    }
 }

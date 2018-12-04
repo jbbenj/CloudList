@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Created by Afiq Yusof on 2018.11.28 
+Copyright © 2018 Afiq Yusof. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+
+        <p:dialog id="CartViewDlg" widgetVar="CartViewDialog" modal="true"
+                  resizable="false" appendTo="@(body)" header="#{bundle.ViewCartTitle}">
+            <h:form id="CartViewForm" class="ui-datatable-data">
+
+                <c:if test="#{cartManager.selected.type == 'Album'}">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                     rendered="#{cartManager.selected != null}">
+
+                            <!-- Album Title -->
+                            <h:outputText value="#{bundle.ViewPublicAlbumLabel_title}"/>
+                            <h:outputText value="#{cartManager.selected.title}"/>
+
+                            <!-- Album Artist -->
+                            <h:outputText value="#{bundle.ViewPublicAlbumLabel_artist}"/>
+                            <h:outputText value="#{cartManager.selected.artist}"/>
+
+                            <!-- Album Release Year -->
+                            <h:outputText value="#{bundle.ViewPublicAlbumLabel_releaseYear}"/>
+                            <h:outputText value="#{cartManager.selected.releaseYear}"/>
+
+                            <!-- Album Track Number -->
+                            <h:outputText value="#{bundle.ViewPublicAlbumLabel_trackNum}"/>
+                            <h:outputText value="#{cartManager.selected.trackNum}"/>
+
+                            <!-- Album Genres -->
+                            <h:outputText value="#{bundle.ViewPublicAlbumLabel_genres}"/>
+                            <h:outputText value="#{cartManager.selected.genres}"/>
+
+                            <!-- Album Average Price -->
+                            <h:outputText value="#{bundle.ViewPublicAlbumLabel_averagePrice}"/>
+                            <h:outputText value="#{cartManager.selected.averagePrice}"/>
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </c:if>
+                <c:if test="#{cartManager.selected.type == 'Book'}">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                     rendered="#{cartManager.selected != null}">
+
+                            <!-- Book Title -->
+                            <h:outputText value="#{bundle.ViewPublicBookLabel_title}"/>
+                            <h:outputText value="#{cartManager.selected.title}"/>
+
+                            <!-- Book Author -->
+                            <h:outputText value="#{bundle.ViewPublicBookLabel_author}"/>
+                            <h:outputText value="#{cartManager.selected.author}"/>
+
+                            <!-- Book Publication Year -->
+                            <h:outputText value="#{bundle.ViewPublicBookLabel_publicationYear}"/>
+                            <h:outputText value="#{cartManager.selected.publicationYear}"/>
+
+                            <!-- Book ISBN -->
+                            <h:outputText value="#{bundle.ViewPublicBookLabel_isbn}"/>
+                            <h:outputText value="#{cartManager.selected.isbn}"/>
+
+                            <!-- Book Genres -->
+                            <h:outputText value="#{bundle.ViewPublicBookLabel_genres}"/>
+                            <h:outputText value="#{cartManager.selected.genres}"/>
+
+                            <!-- Book Average Price -->
+                            <h:outputText value="#{bundle.ViewPublicBookLabel_averagePrice}"/>
+                            <h:outputText value="#{cartManager.selected.averagePrice}"/>
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </c:if>
+                <c:if test="#{cartManager.selected.type == 'Movie'}">
+                    <h:panelGroup id="display" class="ui-datagrid-data">
+                        <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                     rendered="#{cartManager.selected != null}">
+
+                            <!-- Movie Title -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_title}"/>
+                            <h:outputText value="#{cartManager.selected.title}"/>
+
+                            <!-- Movie YouTube Trailer ID -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_youtubeTrailerId}"/>
+                            <h:outputText value="#{cartManager.selected.youtubeTrailerId}"/>
+
+                            <!-- Movie Genres -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_genres}"/>
+                            <h:outputText value="#{cartManager.selected.genres}"/>
+
+                            <!-- Movie Release Date -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_releaseDate}"/>
+                            <h:outputText value="#{cartManager.selected.releaseDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+
+                            <!-- Movie Director -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_director}"/>
+                            <h:outputText value="#{cartManager.selected.director}"/>
+
+                            <!-- Movie Stars -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_stars}"/>
+                            <h:outputText value="#{cartManager.selected.stars}"/>
+
+                            <!-- Movie Film Rating -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_filmRating}"/>
+                            <h:outputText value="#{cartManager.selected.filmRating}"/>
+
+                            <!-- Movie Percent Liked -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_percentLiked}"/>
+                            <h:outputText value="#{cartManager.selected.percentLiked}"/>
+
+                            <!-- Movie Price Average -->
+                            <h:outputText value="#{bundle.ViewPublicMovieLabel_averagePrice}"/>
+                            <h:outputText value="#{cartManager.selected.averagePrice}"/>
+
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </c:if>
+                <h:panelGroup>
+                    <br />
+                    <div align="center">
+                        <!-- CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="PF('CartViewDialog').hide()" 
+                                         icon="fas fa-window-close"/>
+                    </div>
+                </h:panelGroup>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -373,4 +373,11 @@ public class User implements Serializable {
         return "edu.vt.EntityBeans.User[ id=" + id + " ]";
     }
     
+    public String ccNumberLast4Digits() {
+        // Return the substring from the 12th character to the last character.
+        // Credit card number is 16 digits long going from position 0 to 15.
+        // Positions: 0123456789012345 --> 2345 Last 4 digits.
+        return getCcNumber().substring(12);
+    }
+    
 }

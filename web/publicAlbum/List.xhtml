@@ -71,19 +71,17 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                             </p:column>
 
                             <f:facet name="footer">
+
+                                <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
+                                                 update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
+                                                 disabled="#{empty publicAlbumController.selected}"/>
                                 <c:if test="#{userController.isLoggedIn() == true}">
-                                    <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
-                                                     update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
-                                                     disabled="#{empty publicAlbumController.selected}"/>
                                     <p:commandButton id="buyButton" icon="fas fa-shopping-cart" value="#{bundle.Cart}"
-                                                     actionListener="#{cartManager.addToCart(publicAlbumController.selected)}"
+                                                     action="#{cartManager.addToCart(publicAlbumController.selected)}"
                                                      update=":growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
-                                                     disabled="#{empty publicAlbumController.selected}"/>
-                                </c:if>
-                                <c:if test="#{userController.isLoggedIn() == false}">
-                                    <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
-                                                     update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
-                                                     disabled="#{empty publicAlbumController.selected}"/>
+                                                     disabled="#{empty publicAlbumController.selected ||
+                                                                 cartManager.isInCart(publicAlbumController.selected) ||
+                                                                 userAlbumController.isOwnItem(publicAlbumController.selected)}"/>
                                 </c:if>
                             </f:facet>
                         </p:dataTable>
@@ -91,7 +89,7 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                 </h:form>
 
                 <ui:include src="View.xhtml"/>
-                
+
             </div>
         </ui:define>
     </ui:composition>

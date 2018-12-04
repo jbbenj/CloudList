@@ -5,6 +5,7 @@
 package edu.vt.FacadeBeans;
 
 import edu.vt.EntityBeans.UserAlbum;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,4 +29,23 @@ public class UserAlbumFacade extends AbstractFacade<UserAlbum> {
         super(UserAlbum.class);
     }
     
+    public List<UserAlbum> findByUserId(Integer userId) {
+        if (em.createQuery("SELECT p FROM UserAlbum p WHERE p.userId.id = " + userId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (List<UserAlbum>) (em.createQuery("SELECT p FROM UserAlbum p WHERE p.userId.id = " + userId)
+                    .getResultList());
+        }
+    }
+    
+    public UserAlbum findByUserIdAndUserVersionId(Integer userId, Integer userVersionId) {
+        if (em.createQuery("SELECT p FROM UserAlbum p WHERE p.userId.id = " + userId + " AND p.id = " + userVersionId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (UserAlbum) (em.createQuery("SELECT p FROM UserAlbum p WHERE p.userId.id = " + userId + " AND p.id = " + userVersionId)
+                    .getSingleResult());
+        }
+    }
 }

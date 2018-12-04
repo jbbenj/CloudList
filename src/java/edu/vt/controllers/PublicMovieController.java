@@ -1,5 +1,6 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.Media;
 import edu.vt.EntityBeans.PublicMovie;
 import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserMovie;
@@ -213,6 +214,17 @@ public class PublicMovieController implements Serializable {
         if (movie != null)
             return true;
         return false;
+    }
+    
+    public void removeIfMatchType(List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media curr = medias.get(i);
+            if (curr.getType().equals("Movie")) {
+                PublicMovie foundMovie = getFacade().findByUserIdAndUserVersionId(curr.getUserId(), curr.getUserVersionId());
+                setSelected(foundMovie);
+                destroy();
+            }
+        }
     }
     
 }

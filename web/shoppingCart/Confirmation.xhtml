@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Muhammad Afiq Yusof on 2018.11.02
+Copyright © 2018 Muhammad Afiq Yusof. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Purchase Confirmation"></h:outputText>
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center" style="width:50%; margin:0 auto;">
+
+                <!-- This form displays the Pizza Hut logo and lists the order details -->
+                <h:form id="PurchaseConfirmation">
+
+                    <h:graphicImage url="#{resource['images:CloudlistLogo_bg.png']}" width="auto" height="270px"  alt="Logo"/>
+                    <br/><br/>
+                    Thank You <strong>#{userController.selected.firstName} #{userController.selected.lastName}</strong> for your order!
+                    <br/><br/><br/>
+                    Your Credit Card ending with ***<strong>#{userController.selected.ccNumberLast4Digits()}</strong> will be charged 
+                    <strong>$#{cartManager.totalPrice}</strong> including <strong>#{100 * cartManager.salesTax}%</strong> sales tax 
+                    for the following items:
+                    <br/><br/>
+                    <h:panelGroup id="display">
+                        <table border="0" align="center" cellspacing="10">
+                            <tr>
+                                <th style="text-align: center">#{bundle.ListCart_title}</th>
+                                <th style="text-align: center">#{bundle.ListCart_type}</th>
+                                <th style="text-align: center">#{bundle.ListCart_price}</th>
+                            </tr>
+                            <c:forEach items="#{cartManager.cart}" var="item">
+                                <tr>
+                                    <td style="text-align: center">#{item.title}</td>
+                                    <td style="text-align: center">#{item.type}</td>
+                                    <td style="text-align: center">#{item.averagePrice}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </h:panelGroup>
+                    <br/><br/>
+                    Your items will be delivered to your following address:
+                    <br/><br/>
+                    <strong>#{userController.selected.address1} #{userController.selected.address2}, 
+                        #{userController.selected.city}, #{userController.selected.state}
+                        #{userController.selected.zipcode}</strong>
+                    <br/><br/>
+                    Thank You for Choosing CloudList!
+                    <br/><br/><br/>
+                    <p:commandButton value="Home" icon="fas fa-home" ajax="false"
+                                     action="/index?faces-redirect=true">
+                        <f:actionListener binding="#{publicAlbumController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{userAlbumController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{publicBookController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{userBookController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{publicMovieController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{userMovieController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{cartManager.clearCart()}" />
+                    </p:commandButton>
+                    &nbsp;
+                    <p:commandButton value="Sign Out" icon="fas fa-sign-out-alt" ajax="false"
+                                     action="#{userController.logout()}">
+                        <f:actionListener binding="#{publicAlbumController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{userAlbumController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{publicBookController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{userBookController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{publicMovieController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{userMovieController.removeIfMatchType(cartManager.cart)}" />
+                        <f:actionListener binding="#{cartManager.clearCart()}" />
+                    </p:commandButton>
+
+                </h:form>
+                <br/><br/><br/>
+            </div>
+        </ui:define>
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+</html>

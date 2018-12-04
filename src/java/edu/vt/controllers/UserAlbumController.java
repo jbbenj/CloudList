@@ -1,10 +1,13 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.Media;
+import edu.vt.EntityBeans.PublicAlbum;
 import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserAlbum;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.UserAlbumFacade;
+import edu.vt.globals.Methods;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,6 +29,8 @@ public class UserAlbumController implements Serializable {
     
     private final String discogsApiKey = "api_key=iBFdeeVSOrdzUADEAaWP";
 
+    @EJB
+    private edu.vt.FacadeBeans.UserFacade userFacade;
     @EJB
     private edu.vt.FacadeBeans.UserAlbumFacade ejbFacade;
     private List<UserAlbum> items = null;
@@ -87,7 +92,7 @@ public class UserAlbumController implements Serializable {
 
     public List<UserAlbum> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findByUserId((int) Methods.sessionMap().get("user_id"));
         }
         return items;
     }
@@ -173,4 +178,21 @@ public class UserAlbumController implements Serializable {
 
     }
 
+    public void removeIfMatchType(List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media curr = medias.get(i);
+            if (curr.getType().equals("Album")) {
+                UserAlbum foundAlbum = getFacade().find(curr.getUserVersionId());
+                setSelected(foundAlbum);
+                destroy();
+            }
+        }
+    }
+    
+    public boolean isOwnItem(PublicAlbum pubAlbum) {
+        UserAlbum userAlbum = getFacade().findByUserIdAndUserVersionId((int) Methods.sessionMap().get("user_id"), pubAlbum.getUserVersionId());
+        if (userAlbum == null)
+            return false;
+        return true;
+    }
 }

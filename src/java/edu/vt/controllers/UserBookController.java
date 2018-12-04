@@ -1,10 +1,13 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.Media;
+import edu.vt.EntityBeans.PublicBook;
 import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserBook;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.UserBookFacade;
+import edu.vt.globals.Methods;
 
 import java.io.Serializable;
 import java.util.List;
@@ -87,7 +90,7 @@ public class UserBookController implements Serializable {
 
     public List<UserBook> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findByUserId((int) Methods.sessionMap().get("user_id"));
         }
         return items;
     }
@@ -173,4 +176,21 @@ public class UserBookController implements Serializable {
 
     }
 
+    public void removeIfMatchType(List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media curr = medias.get(i);
+            if (curr.getType().equals("Book")) {
+                UserBook foundBook = getFacade().find(curr.getUserVersionId());
+                setSelected(foundBook);
+                destroy();
+            }
+        }
+    }
+    
+    public boolean isOwnItem(PublicBook pubBook) {
+        UserBook userBook = getFacade().findByUserIdAndUserVersionId((int) Methods.sessionMap().get("user_id"), pubBook.getUserVersionId());
+        if (userBook == null)
+            return false;
+        return true;
+    }
 }

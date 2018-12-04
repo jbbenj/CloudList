@@ -1,5 +1,6 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.Media;
 import edu.vt.EntityBeans.PublicAlbum;
 import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserAlbum;
@@ -207,4 +208,14 @@ public class PublicAlbumController implements Serializable {
         return false;
     }
     
+    public void removeIfMatchType(List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media curr = medias.get(i);
+            if (curr.getType().equals("Album")) {
+                PublicAlbum foundAlbum = getFacade().findByUserIdAndUserVersionId(curr.getUserId(), curr.getUserVersionId());
+                setSelected(foundAlbum);
+                destroy();
+            }
+        }
+    }
 }

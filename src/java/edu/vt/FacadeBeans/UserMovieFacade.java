@@ -5,6 +5,7 @@
 package edu.vt.FacadeBeans;
 
 import edu.vt.EntityBeans.UserMovie;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,4 +29,23 @@ public class UserMovieFacade extends AbstractFacade<UserMovie> {
         super(UserMovie.class);
     }
     
+    public List<UserMovie> findByUserId(Integer userId) {
+        if (em.createQuery("SELECT p FROM UserMovie p WHERE p.userId.id = " + userId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (List<UserMovie>) (em.createQuery("SELECT p FROM UserMovie p WHERE p.userId.id = " + userId)
+                    .getResultList());
+        }
+    }
+    
+    public UserMovie findByUserIdAndUserVersionId(Integer userId, Integer userVersionId) {
+        if (em.createQuery("SELECT p FROM UserMovie p WHERE p.userId.id = " + userId + " AND p.id = " + userVersionId)
+                .getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (UserMovie) (em.createQuery("SELECT p FROM UserMovie p WHERE p.userId.id = " + userId + " AND p.id = " + userVersionId)
+                    .getSingleResult());
+        }
+    }
 }

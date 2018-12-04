@@ -54,6 +54,17 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 
                                 <li class="verticalMenuItem">
                                     <!--
+                                    ===================================
+                                    |          MY CART Link           |
+                                    ===================================
+                                    -->
+                                    <h:link outcome="/shoppingCart/Cart">
+                                        <i class="fas fa-shopping-cart"></i>&nbsp;My Cart
+                                    </h:link>
+                                </li>
+                                
+                                <li class="verticalMenuItem">
+                                    <!--
                                     =====================================
                                     |          MY ALBUMS Link           |
                                     =====================================
@@ -196,17 +207,7 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                 <h:outputText value="#{userController.selected.lastName}" />
                                 
                                 <h:outputText value="#{bundle.ListUserTitle_ccNumber}"/>
-                                <h:outputText value="#{userController.selected.ccNumber}" />
-                                
-                                <h:outputText value="#{bundle.ListUserTitle_ccExpires}"/>
-                                <!--
-                                
-                                TBD
-                                -->
-                                <h:outputText value="#{userController.ccExpirationMonthYear()}"/>
-                                
-                                <h:outputText value="#{bundle.ListUserTitle_ccSecurityCode}"/>
-                                <h:outputText value="#{userController.selected.ccSecurityCode}"/>
+                                <h:outputText value="****#{userController.selected.ccNumberLast4Digits()}" />
 
                                 <h:outputText value="#{bundle.ViewUserLabel_address1}"/>
                                 <h:outputText value="#{userController.selected.address1}" />

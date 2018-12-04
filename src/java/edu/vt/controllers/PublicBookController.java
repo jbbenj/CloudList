@@ -1,5 +1,6 @@
 package edu.vt.controllers;
 
+import edu.vt.EntityBeans.Media;
 import edu.vt.EntityBeans.PublicBook;
 import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserBook;
@@ -193,14 +194,6 @@ public class PublicBookController implements Serializable {
     
     public boolean isPublic(UserBook bookToCheck) {
         
-        /*
-        List<PublicBook> temp = getFacade().findAll();
-        for (int i = 0; i < temp.size(); i++) {
-            System.out.println(temp.get(i).getTitle() + " " + temp.get(i).getId() + " " + temp.get(i).getUserId());
-        }
-        System.out.println("searching for: " + bookToCheck.getId() + " " + bookToCheck.getUserId().getId());
-        */
-        
         User user = bookToCheck.getUserId();
         if (user == null) {
             return false;
@@ -211,5 +204,16 @@ public class PublicBookController implements Serializable {
         if (book != null)
             return true;
         return false;
+    }
+    
+    public void removeIfMatchType(List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media curr = medias.get(i);
+            if (curr.getType().equals("Book")) {
+                PublicBook foundBook = getFacade().findByUserIdAndUserVersionId(curr.getUserId(), curr.getUserVersionId());
+                setSelected(foundBook);
+                destroy();
+            }
+        }
     }
 }

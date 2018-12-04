@@ -8,8 +8,7 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template/siteTemplate.xhtml">
 
@@ -31,37 +30,48 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                                      class="dataTable"
                                      >
                             
-                            <p:ajax event="rowSelect"   update="purchaseButton"/>
-                            <p:ajax event="rowUnselect" update="purchaseButton"/>
+                            <p:ajax event="rowSelect"   update="uncartButton purchaseButton"/>
+                            <p:ajax event="rowUnselect" update="uncartButton purchaseButton"/>
                             
 
                             <!-- Media Name -->
-                            <p:column sortBy="#{item.name}" headerText="#{bundle.ListCart_title}" >
-                                <h:outputText class="standardText" value="#{item.name}"/>
+                            <p:column sortBy="#{item.title}" headerText="#{bundle.ListCart_title}" >
+                                <h:outputText class="standardText" value="#{item.title}"/>
                             </p:column>
 
+                            <!-- Media Type -->
+                            <p:column sortBy="#{item.type}" headerText="#{bundle.ListCart_type}" >
+                                <h:outputText class="standardText" value="#{item.type}"/>
+                            </p:column>
+                            
                             <!-- Media Price -->
-                            <p:column sortBy="#{item.price}" headerText="#{bundle.ListCart_price}" >
-                                <h:outputText class="standardText" value="#{item.price}"/>
+                            <p:column sortBy="#{item.averagePrice}" headerText="#{bundle.ListCart_price}" >
+                                <h:outputText class="standardText" value="#{item.averagePrice}"/>
                             </p:column>
 
                             <f:facet name="footer">
-
-                                <p:commandButton id="purchaseButton" icon="fas fa-money-bill" value="#{bundle.Purchase}"
-                                                 actionListener="#{cartManager.purchase()}"
+                                
+                                <p:commandButton id="uncartButton" icon="fas fa-trash-alt" value="#{bundle.Uncart}"
+                                                 action="#{cartManager.removeFromCart(cartManager.selected)}"
                                                  update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
-                                                 disabled="#{empty publicAlbumController.selected}"/>
-                                <!--
+                                                 disabled="#{empty cartManager.selected}"/>
+                                
                                 <p:commandButton id="viewButton"   icon="fas fa-eye" value="#{bundle.View}"
-                                                 update=":PublicAlbumViewForm" oncomplete="PF('PublicAlbumViewDialog').show()"
-                                                 disabled="#{empty publicAlbumController.selected}"/>
-                                -->
+                                                 update=":CartViewForm" oncomplete="PF('CartViewDialog').show()"
+                                                 disabled="#{empty cartManager.selected}"/>
+                                
+                                <p:commandButton id="purchaseButton" icon="fas fa-money-bill" value="#{bundle.Purchase}"
+                                                 action="#{cartManager.purchase()}"
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                                 disabled="#{empty cartManager.cart}"/>
 
                             </f:facet>
                         </p:dataTable>
                     </p:panel>
                 </h:form>
 
+                <ui:include src="View.xhtml"/>
+                
             </div>
         </ui:define>
     </ui:composition>
