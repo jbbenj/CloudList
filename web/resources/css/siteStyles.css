@@ -83,7 +83,6 @@ Style the div component whose unique id is "header" per reference
 <div id="header"> in siteTemplate
 */
 #header {
-    position: fixed;
     background-color: brown;
     background: url("#{resource['images:HeaderFooter.jpg']}"); 
     width: 100%;
@@ -112,7 +111,6 @@ Style the div component whose unique id is "footer" per reference
 <div id="footer"> in siteTemplate
 */
 #footer {
-    position: fixed;
     height: 150px;
     width: 100%;
     left: 0px;
