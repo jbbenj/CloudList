@@ -24,9 +24,6 @@ import javax.faces.convert.FacesConverter;
 @Named("publicAlbumController")
 @SessionScoped
 public class PublicAlbumController implements Serializable {
-
-    @EJB
-    private edu.vt.FacadeBeans.UserFacade userFacade;
     
     @EJB
     private edu.vt.FacadeBeans.PublicAlbumFacade ejbFacade;
@@ -204,4 +201,5 @@ public class PublicAlbumController implements Serializable {
             return true;
         return false;
     }
+    
 }
