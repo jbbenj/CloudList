@@ -23,6 +23,8 @@ import javax.faces.convert.FacesConverter;
 @Named("userAlbumController")
 @SessionScoped
 public class UserAlbumController implements Serializable {
+    
+    private final String discogsApiKey = "api_key=iBFdeeVSOrdzUADEAaWP";
 
     @EJB
     private edu.vt.FacadeBeans.UserAlbumFacade ejbFacade;

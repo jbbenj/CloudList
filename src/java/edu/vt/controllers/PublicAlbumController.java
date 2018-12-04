@@ -25,6 +25,11 @@ import javax.faces.convert.FacesConverter;
 @SessionScoped
 public class PublicAlbumController implements Serializable {
     
+    private final String discogsApiKey = "api_key=iBFdeeVSOrdzUADEAaWP";
+
+    @EJB
+    private edu.vt.FacadeBeans.UserFacade userFacade;
+    
     @EJB
     private edu.vt.FacadeBeans.PublicAlbumFacade ejbFacade;
     private List<PublicAlbum> items = null;

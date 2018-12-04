@@ -23,6 +23,8 @@ import javax.faces.convert.FacesConverter;
 @Named("userBookController")
 @SessionScoped
 public class UserBookController implements Serializable {
+    
+    private final String goodreadsApiKey = "api_key=RRjzK1W8TyINyDz8VzOqcA";
 
     @EJB
     private edu.vt.FacadeBeans.UserBookFacade ejbFacade;

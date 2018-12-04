@@ -23,6 +23,16 @@ import javax.faces.convert.FacesConverter;
 @Named("userMovieController")
 @SessionScoped
 public class UserMovieController implements Serializable {
+    
+    /*
+    ===============================
+    Instance Variables (Properties)
+    ===============================
+     */
+    private final String tmdbMovieWebServicesBaseUrl = "http://api.themoviedb.org/3/movie/";
+    private final String omdbMovieWebServicesBaseUrl = "http://www.omdbapi.com/?apikey=9f67dd7a&tomatoes=true&type=movie";
+
+    private final String tmdbApiKey = "api_key=9b42c31eac0b25c9099cd017dfb9c2ae";
 
     @EJB
     private edu.vt.FacadeBeans.UserMovieFacade ejbFacade;
