@@ -38,7 +38,7 @@ public class UserPhoto implements Serializable {
     /*
     ========================================================
     Instance variables representing the attributes (columns)
-    of the UserPhoto table in the PizzaHutDB database.
+    of the UserPhoto table in the CloudListDB database.
     ========================================================
      */
     private static final long serialVersionUID = 1L;
@@ -90,7 +90,7 @@ public class UserPhoto implements Serializable {
     /*
     ======================================================
     Getter and Setter methods for the attributes (columns)
-    of the UserPhoto table in the PizzaHutDB database.
+    of the UserPhoto table in the CloudListDB database.
     ======================================================
      */
     public Integer getId() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Created by Muhammad Afiq Yusof on 2018.11.02
-Copyright © 2018 Muhammad Afiq Yusof. All rights reserved.
+Created by Afiq Yusof on 2018.12.02
+Copyright © 2018 Afiq Yusof. All rights reserved.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -16,52 +16,59 @@ Copyright © 2018 Muhammad Afiq Yusof. All rights reserved.
 
         <ui:define name="title">
             <!-- Set the page title -->
-            <h:outputText value="Security Question"></h:outputText>
+            <h:outputText value="Change Photo"></h:outputText>
         </ui:define>
 
         <!-- Create the content for this page below -->
-        <ui:define name="editableContent">
+        <ui:define name="editableContent"> 
 
-            <div align="center" style="width:50%; margin:0 auto;">
+            <div align="center" style="width:90%; margin:0 auto;">
 
-                <h:form>
-                    
-                    <h1>Please Answer Your Security Question</h1>
+                <h1>Profile Photo</h1>
+                <br/>
+                <!-- 
+                ================================================================
+                Obtain User's Photo by Selecting and Uploading an Existing Photo
+                ================================================================
+                -->
 
+                <!-- 
+                The enctype attribute sets the content type of the data to be submitted to the server.  
+                enctype="multipart/form-data" is required when the form used has a file upload control.
+                -->
+
+                <h:form id="UploadPhoto" enctype="multipart/form-data">
                     <!-- fieldset is an HTML tag that draws a box around the content enclosed within it -->
                     <fieldset>
-                        <div style="margin-bottom:20px">
-                            <h:outputLabel for="answer" value="#{passwordResetManager.getSelectedSecurityQuestionForUsername()}" />
-                        </div>
+                        <h1 style="color: black">Click Choose File to select an existing photo on your computer and then click Upload to upload it</h1>
 
-                        <div style="margin-bottom:10px">
-                            <p:inputText id="answer" value="#{passwordResetManager.answerToSecurityQuestion}" required="true"
-                                         requiredMessage="Please enter your answer to the security question!" 
-                                         class="inputTextField" />
-                        </div>
-
-                        <br/>
+                        <!--
+                        p:fileUpload uploads the selected file and stores it into "private UploadedFile file" of userPhotoController.
+                        -->
+                        <p:fileUpload id="file" value="#{userPhotoController.file}" mode="simple" />
+                        <br/><br/>
                         <!--
                         ================================
-                        |         SUBMIT Button        |
+                        |        UPLOAD Button         |
                         ================================
+                        After the file is uploaded by p:fileUpload above, we invoke userPhotoController.upload()
+                        to store the uploaded file into the UserPhotoStorage external directory.
                         -->
-                        <p:commandButton id="submit" value="Submit" ajax="false" icon="fas fa-arrow-up"
-                                         action="#{passwordResetManager.securityAnswerSubmit()}"/>
-                        &nbsp;
-                        <!--
-                        ================================
-                        |         CANCEL Button        |
-                        ================================
-                        -->
-                        <p:button outcome="/index" value="Cancel" icon="fas fa-ban"  />
+                        <p:commandButton id="upload" value="Upload" ajax="false" 
+                                         action="#{userPhotoController.upload()}" icon="fas fa-upload" />
                     </fieldset>
+                    <br/><br/>
+                    <!--
+                    ================================
+                    |        CANCEL Button         |
+                    ================================
+                    -->
+                    <p:button outcome="/userAccount/Profile" value="Cancel" icon="fas fa-ban"  />
 
-                    <br/>                
                 </h:form>
             </div>
-        </ui:define>
 
+        </ui:define>
     </ui:composition>
     <!-- Do not enter tags after the composition line since they are ignored by JSF -->
 </html>

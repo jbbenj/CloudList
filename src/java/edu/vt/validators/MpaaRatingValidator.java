@@ -1,6 +1,6 @@
 /*
- * Created by Osman Balci on 2018.06.20  * 
- * Copyright © 2018 Osman Balci. All rights reserved. * 
+ * Created by Muhammad Afiq Yusof on 2018.11.29  * 
+ * Copyright © 2018 Muhammad Afiq Yusof. All rights reserved. * 
  */
 package edu.vt.validators;
 

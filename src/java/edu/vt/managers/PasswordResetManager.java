@@ -1,5 +1,5 @@
 /*
- * Created by Muhammad Afiq Yusof on 2018.11.02  * 
+ * Created by Muhammad Afiq Yusof on 2018.11.28  * 
  * Copyright © 2018 Muhammad Afiq Yusof. All rights reserved. * 
  */
 package edu.vt.managers;
@@ -115,8 +115,6 @@ public class PasswordResetManager implements Serializable {
      */
     public String getSelectedSecurityQuestionForUsername() {
 
-        return (String) Methods.sessionMap().get("security_question_number");
-        /*
         // Obtain the object reference of the User object with username
         User user = getUserFacade().findByUsername(username);
 
@@ -124,7 +122,7 @@ public class PasswordResetManager implements Serializable {
         int questionNumber = user.getSecurityQuestionNumber();
 
         // Return the security question corresponding to the question number
-        return Constants.QUESTIONS[questionNumber];*/
+        return Constants.QUESTIONS[questionNumber];
     }
 
     /*

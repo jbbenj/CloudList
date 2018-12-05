@@ -8,15 +8,11 @@ import edu.vt.EntityBeans.Media;
 import edu.vt.EntityBeans.PublicAlbum;
 import edu.vt.EntityBeans.PublicBook;
 import edu.vt.EntityBeans.PublicMovie;
-import edu.vt.EntityBeans.UserAlbum;
-import edu.vt.EntityBeans.UserBook;
-import edu.vt.EntityBeans.UserMovie;
 import edu.vt.globals.Methods;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -30,19 +26,6 @@ import javax.inject.Named;
 public class CartManager implements Serializable {
 
     // Fields
-    @EJB
-    private edu.vt.FacadeBeans.PublicAlbumFacade publicAlbumFacade;
-    @EJB
-    private edu.vt.FacadeBeans.PublicBookFacade publicBookFacade;
-    @EJB
-    private edu.vt.FacadeBeans.PublicMovieFacade publicMovieFacade;
-    @EJB
-    private edu.vt.FacadeBeans.UserAlbumFacade userAlbumFacade;
-    @EJB
-    private edu.vt.FacadeBeans.UserBookFacade userBookFacade;
-    @EJB
-    private edu.vt.FacadeBeans.UserMovieFacade userMovieFacade;
-
     private double totalPrice;
     private final double salesTax = 0.053;
     private List<Media> cart = null;
@@ -86,6 +69,13 @@ public class CartManager implements Serializable {
     }
 
     // Methods
+    
+    /**
+     * Adds an item to the cart. The object would then be converted into a Media
+     * type and stored into the cart list as of type Media
+     * @param obj The item to be added
+     * @return refreshes the page
+     */
     public String addToCart(Object obj) {
 
         Media media = new Media();
@@ -153,6 +143,11 @@ public class CartManager implements Serializable {
         return retStr;
     }
 
+    /**
+     * Removes an item from the cart. Simply call remove on a media object
+     * @param media The item to be removed from the cart
+     * @return refreshes the page
+     */
     public String removeFromCart(Media media) {
 
         if (!cart.remove(media)) {
@@ -164,10 +159,19 @@ public class CartManager implements Serializable {
         return "/shoppingCart/Cart?faces-redirect=true";
     }
 
+    /**
+     * Empties the cart
+     */
     public void clearCart() {
         cart.clear();
     }
 
+    /**
+     * Checks if obj is in the cart and returns true if yes. Otherwise, return
+     * false
+     * @param obj The item to be checked
+     * @return true if obj is in the cart
+     */
     public boolean isInCart(Object obj) {
 
         if (cart == null || cart.isEmpty() || obj == null) {
@@ -204,7 +208,11 @@ public class CartManager implements Serializable {
         return false;
     }
 
-    // TODO This needs to return a string that redirects to a purchase confirmation page
+    /**
+     * Calculates the total price of all the items in the cart. It then
+     * redirects the user to the confirmation page.
+     * @return redirects to confirmation page
+     */
     public String purchase() {
 
         totalPrice = 0;
