@@ -16,8 +16,6 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
             <h:form id="UserMovieViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userMovieController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUserMovieLabel_id}"/>
-                        <h:outputText value="#{userMovieController.selected.id}" title="#{bundle.ViewUserMovieTitle_id}"/>
                         <h:outputText value="#{bundle.ViewUserMovieLabel_title}"/>
                         <h:outputText value="#{userMovieController.selected.title}" title="#{bundle.ViewUserMovieTitle_title}"/>
                         <h:outputText value="#{bundle.ViewUserMovieLabel_youtubeTrailerId}"/>
@@ -38,8 +36,6 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                         <h:outputText value="#{userMovieController.selected.percentLiked}" title="#{bundle.ViewUserMovieTitle_percentLiked}"/>
                         <h:outputText value="#{bundle.ViewUserMovieLabel_averagePrice}"/>
                         <h:outputText value="#{userMovieController.selected.averagePrice}" title="#{bundle.ViewUserMovieTitle_averagePrice}"/>
-                        <h:outputText value="#{bundle.ViewUserMovieLabel_userId}"/>
-                        <h:outputText value="#{userMovieController.selected.userId}" title="#{bundle.ViewUserMovieTitle_userId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UserMovieViewDialog.hide()"/>
                 </h:panelGroup>

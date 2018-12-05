@@ -16,8 +16,6 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
             <h:form id="UserBookViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userBookController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUserBookLabel_id}"/>
-                        <h:outputText value="#{userBookController.selected.id}" title="#{bundle.ViewUserBookTitle_id}"/>
                         <h:outputText value="#{bundle.ViewUserBookLabel_title}"/>
                         <h:outputText value="#{userBookController.selected.title}" title="#{bundle.ViewUserBookTitle_title}"/>
                         <h:outputText value="#{bundle.ViewUserBookLabel_author}"/>
@@ -30,8 +28,6 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                         <h:outputText value="#{userBookController.selected.genres}" title="#{bundle.ViewUserBookTitle_genres}"/>
                         <h:outputText value="#{bundle.ViewUserBookLabel_averagePrice}"/>
                         <h:outputText value="#{userBookController.selected.averagePrice}" title="#{bundle.ViewUserBookTitle_averagePrice}"/>
-                        <h:outputText value="#{bundle.ViewUserBookLabel_userId}"/>
-                        <h:outputText value="#{userBookController.selected.userId}" title="#{bundle.ViewUserBookTitle_userId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UserBookViewDialog.hide()"/>
                 </h:panelGroup>

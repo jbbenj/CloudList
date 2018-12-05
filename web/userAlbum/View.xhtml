@@ -16,8 +16,6 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
             <h:form id="UserAlbumViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userAlbumController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUserAlbumLabel_id}"/>
-                        <h:outputText value="#{userAlbumController.selected.id}" title="#{bundle.ViewUserAlbumTitle_id}"/>
                         <h:outputText value="#{bundle.ViewUserAlbumLabel_title}"/>
                         <h:outputText value="#{userAlbumController.selected.title}" title="#{bundle.ViewUserAlbumTitle_title}"/>
                         <h:outputText value="#{bundle.ViewUserAlbumLabel_artist}"/>
@@ -32,8 +30,6 @@ Copyright © 2018 Afiq Yusof. All rights reserved.
                         <h:outputText value="#{userAlbumController.selected.genres}" title="#{bundle.ViewUserAlbumTitle_genres}"/>
                         <h:outputText value="#{bundle.ViewUserAlbumLabel_averagePrice}"/>
                         <h:outputText value="#{userAlbumController.selected.averagePrice}" title="#{bundle.ViewUserAlbumTitle_averagePrice}"/>
-                        <h:outputText value="#{bundle.ViewUserAlbumLabel_userId}"/>
-                        <h:outputText value="#{userAlbumController.selected.userId}" title="#{bundle.ViewUserAlbumTitle_userId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UserAlbumViewDialog.hide()"/>
                 </h:panelGroup>
